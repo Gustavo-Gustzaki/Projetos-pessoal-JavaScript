@@ -24,6 +24,7 @@ async function Parar() {
     let notasUm = [];
     let notasDois = [];
     let notasTres = [];
+    let resultadoNotasFinal = [];
 
 async function CadastroAlunos() {
 
@@ -121,6 +122,7 @@ async function pesquisarAlunos () {
 //----------------------------------------------------------------------
 async function notasAlunos( ) {
 
+    console.clear();
     console.log("=================")
     console.log(" NOTAS DE ALUNOS ")
     console.log("=================")
@@ -146,23 +148,16 @@ async function notasAlunos( ) {
             console.log(`Série: ${seriesAlunos[indice]} ano`);
             console.log(`Genero: ${generosAlunos[indice]}`);
             alunoEncontradoNota = true;
-            break;
         }
 
-    }
-    if(!alunoEncontradoNota){
-        console.log("Não encontrado!");
-    }
     await Parar();
     
-    let notaUm = await rl.question(`Qual é a primeira nota do (a) ${qualAlunoNota}? R: `);
+    let notaUm = Number(await rl.question(`Qual é a primeira nota do (a) ${qualAlunoNota}? R: `));
     while (notaUm === "" || Number(notaUm) < 0){
 
         console.log("[ERRO] Digite novamente!");
-        notaUm = await rl.question(`Qual é a primeira nota do (a) ${qualAlunoNota}? R: `);
+        notaUm = Number(await rl.question(`Qual é a primeira nota do (a) ${qualAlunoNota}? R: `));
     }
-
-    notasUm.push (notaUm)
 
     let fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
@@ -173,43 +168,74 @@ async function notasAlunos( ) {
 
     if (fezRecuperação === "sim" || fezRecuperação === "Sim"){
 
-        notaUm = await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `);
+        notaUm = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         while (notaUm === "" || Number(notaUm) < 0){
 
         console.log("[ERRO] Digite novamente!");
-        notaUm = await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `);
+        notaUm = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
 
         }
-
-        notasUm.push (notaUm)
     }
 
-    let notaDois = await rl.question(`Qual é a segunda nota do (a) ${qualAlunoNota}`)
+    let notaDois = Number(await rl.question(`Qual é a segunda nota do (a) ${qualAlunoNota}? R: `));
     while (notaDois === "" || Number(notaDois) < 0){
 
         console.log("[ERRO] Digite novamente!");
-        notaDois = await rl.question(`Qual é a segunda nota do (a) ${qualAlunoNota}`)
+        notaDois = Number(await rl.question(`Qual é a segunda nota do (a) ${qualAlunoNota}? R: `));
     }
 
-    notasDois.push (notasDois)
-
     fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
-    while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
+        while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
 
         console.log("[ERRO] Digite novamente!");
         fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     }
-    
+
     if (fezRecuperação === "sim" || fezRecuperação === "Sim"){
 
-        notaDois = await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `);
+        notaDois = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         while (notaDois === "" || Number(notaDois) < 0){
 
         console.log("[ERRO] Digite novamente!");
-        notaDois = await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `);
+        notaDois = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
+
         }
-        notasDois.push (notasDois)
     }
+
+
+    let notaTres = Number(await rl.question(`Qual é a terceira nota do (a) ${qualAlunoNota}? R: `));
+    while (notaTres === "" || Number(notaTres) < 0){
+
+        console.log("[ERRO] Digite novamente!");
+        notaTres = Number(await rl.question(`Qual é a terceira nota do (a) ${qualAlunoNota}? R: `));
+    }
+
+    fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
+    while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
+
+    console.log("[ERRO] Digite novamente!");
+    fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
+    }
+
+    if (fezRecuperação === "sim" || fezRecuperação === "Sim"){
+
+        notaTres = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
+        while (notaTres === "" || Number(notaTres) < 0){
+
+        console.log("[ERRO] Digite novamente!");
+        notaTres = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
+        }
+
+    }
+
+        let resultadoNotaFinal = (notaUm + notaDois + notaTres) / 3
+
+        resultadoNotasFinal.push (resultadoNotaFinal)
+
+    }
+        if(!alunoEncontradoNota){
+        console.log("Não encontrado!");
+        }
 
     
 }
@@ -221,6 +247,7 @@ async function listaAlunos () {
     console.log("=================");
     console.log(" LISTA DE ALUNOS");
     console.log("=================");
+    
 
     if (nomesAlunos.length > 0){
     nomesAlunos.forEach ((Alunos, index) => {
@@ -231,6 +258,7 @@ async function listaAlunos () {
         console.log(`Idade: ${idadesAlunos[index]} anos`);
         console.log(`Série: ${seriesAlunos[index]} ano`);
         console.log(`Genero: ${generosAlunos[index]}`);
+        console.log(`Media Final: ${resultadoNotasFinal[index].toFixed(2)}`)
     })
     await Parar();
     }
