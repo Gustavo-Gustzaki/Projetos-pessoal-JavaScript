@@ -134,7 +134,7 @@ async function notasAlunos( ) {
         qualAlunoNota = await rl.question("Qual aluno Você quer pesquisar?");
     }
 
-    let alunoEncontradoNota = false
+    let indiceAlunoEncontrado = -1
 
     for (let indice = 0; indice < nomesAlunos.length;indice++){
 
@@ -147,17 +147,22 @@ async function notasAlunos( ) {
             console.log(`Idade: ${idadesAlunos[indice]} anos`);
             console.log(`Série: ${seriesAlunos[indice]} ano`);
             console.log(`Genero: ${generosAlunos[indice]}`);
-            alunoEncontradoNota = true;
+            indiceAlunoEncontrado = indice
+            break;
         }
-
+    }
     await Parar();
     
+    console.clear();
+
     let notaUm = Number(await rl.question(`Qual é a primeira nota do (a) ${qualAlunoNota}? R: `));
     while (notaUm === "" || Number(notaUm) < 0){
 
         console.log("[ERRO] Digite novamente!");
         notaUm = Number(await rl.question(`Qual é a primeira nota do (a) ${qualAlunoNota}? R: `));
     }
+
+    console.clear();
 
     let fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
@@ -168,6 +173,8 @@ async function notasAlunos( ) {
 
     if (fezRecuperação === "sim" || fezRecuperação === "Sim"){
 
+        console.clear();
+
         notaUm = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         while (notaUm === "" || Number(notaUm) < 0){
 
@@ -177,12 +184,16 @@ async function notasAlunos( ) {
         }
     }
 
+    console.clear();
+
     let notaDois = Number(await rl.question(`Qual é a segunda nota do (a) ${qualAlunoNota}? R: `));
     while (notaDois === "" || Number(notaDois) < 0){
 
         console.log("[ERRO] Digite novamente!");
         notaDois = Number(await rl.question(`Qual é a segunda nota do (a) ${qualAlunoNota}? R: `));
     }
+
+    console.clear();
 
     fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
         while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
@@ -192,6 +203,8 @@ async function notasAlunos( ) {
     }
 
     if (fezRecuperação === "sim" || fezRecuperação === "Sim"){
+
+        console.clear();
 
         notaDois = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         while (notaDois === "" || Number(notaDois) < 0){
@@ -203,12 +216,16 @@ async function notasAlunos( ) {
     }
 
 
+    console.clear();
+
     let notaTres = Number(await rl.question(`Qual é a terceira nota do (a) ${qualAlunoNota}? R: `));
     while (notaTres === "" || Number(notaTres) < 0){
 
         console.log("[ERRO] Digite novamente!");
         notaTres = Number(await rl.question(`Qual é a terceira nota do (a) ${qualAlunoNota}? R: `));
     }
+
+    console.clear();
 
     fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
@@ -219,6 +236,8 @@ async function notasAlunos( ) {
 
     if (fezRecuperação === "sim" || fezRecuperação === "Sim"){
 
+        console.clear();
+
         notaTres = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         while (notaTres === "" || Number(notaTres) < 0){
 
@@ -227,17 +246,15 @@ async function notasAlunos( ) {
         }
 
     }
-
         let resultadoNotaFinal = (notaUm + notaDois + notaTres) / 3
 
-        resultadoNotasFinal.push (resultadoNotaFinal)
+        resultadoNotasFinal[indiceAlunoEncontrado] = resultadoNotaFinal
 
-    }
-        if(!alunoEncontradoNota){
-        console.log("Não encontrado!");
+        if(indiceAlunoEncontrado === -1){
+            console.log("Aluno não encontrado!")
+            await Parar();
+            return;
         }
-
-    
 }
 //----------------------------------------------------------------------
 
@@ -258,7 +275,14 @@ async function listaAlunos () {
         console.log(`Idade: ${idadesAlunos[index]} anos`);
         console.log(`Série: ${seriesAlunos[index]} ano`);
         console.log(`Genero: ${generosAlunos[index]}`);
+
+        if (resultadoNotasFinal[index] !== undefined){
+
         console.log(`Media Final: ${resultadoNotasFinal[index].toFixed(2)}`)
+        }
+        else{
+            console.log("Sem notas cadastradas")
+        }
     })
     await Parar();
     }
