@@ -25,6 +25,7 @@ async function Parar() {
     let notasDois = [];
     let notasTres = [];
     let resultadoNotasFinal = [];
+    let exameFinalNota = [];
 
 async function CadastroAlunos() {
 
@@ -88,6 +89,8 @@ async function pesquisarAlunos () {
     console.log(" PESQUISAR ALUNOS")
     console.log("==================")
 
+    const nomesAlunosCerto = nomesAlunos.map(nome => nome[0].toUpperCase() + nome.slice(1));
+
     let qualAlunopesquisar = await rl.question("Qual aluno Você quer pesquisar? ");
     while (qualAlunopesquisar === "" ){
 
@@ -103,7 +106,7 @@ async function pesquisarAlunos () {
             console.log("Aluno encontrado!")
             console.log("------------------------");
             console.log(`${i+1}.`);
-            console.log(`Nome: ${nomesAlunos[i]}`);
+            console.log(`Nome: ${nomesAlunosCerto[i]}`);
             console.log(`Idade: ${idadesAlunos[i]} anos`);
             console.log(`Série: ${seriesAlunos[i]} ano`);
             console.log(`Genero: ${generosAlunos[i]}`);
@@ -136,14 +139,16 @@ async function notasAlunos( ) {
 
     let indiceAlunoEncontrado = -1
 
+    const nomesAlunosCerto = nomesAlunos.map(nome => nome[0].toUpperCase() + nome.slice(1));
+
     for (let indice = 0; indice < nomesAlunos.length;indice++){
 
         if (qualAlunoNota.toLocaleLowerCase() === nomesAlunos[indice].toLocaleLowerCase()){
-            
+
             console.log("Aluno encontrado!")
             console.log("------------------------");
             console.log(`${indice+1}.`);
-            console.log(`Nome: ${nomesAlunos[indice]}`);
+            console.log(`Nome: ${nomesAlunosCerto[indice]}`);
             console.log(`Idade: ${idadesAlunos[indice]} anos`);
             console.log(`Série: ${seriesAlunos[indice]} ano`);
             console.log(`Genero: ${generosAlunos[indice]}`);
@@ -152,6 +157,12 @@ async function notasAlunos( ) {
         }
     }
     await Parar();
+
+    if(indiceAlunoEncontrado === -1){
+        console.log("Aluno não encontrado!")
+        await Parar();
+        return;
+    }
     
     console.clear();
 
@@ -246,15 +257,49 @@ async function notasAlunos( ) {
         }
 
     }
-        let resultadoNotaFinal = (notaUm + notaDois + notaTres) / 3
+        let resultadoNotaFinal = (notaUm + notaDois + notaTres) / 3;
+        resultadoNotasFinal[indiceAlunoEncontrado] = resultadoNotaFinal;
+    
+        console.log(`Media final do (a) ${nomesAlunosCerto[indiceAlunoEncontrado]}: ${resultadoNotasFinal[indiceAlunoEncontrado].toFixed(2)}`);
 
-        resultadoNotasFinal[indiceAlunoEncontrado] = resultadoNotaFinal
+        if ( 7 > resultadoNotasFinal[indiceAlunoEncontrado]){
 
-        if(indiceAlunoEncontrado === -1){
-            console.log("Aluno não encontrado!")
-            await Parar();
-            return;
+            let fezRecuperaçãoNota = await rl.question(`${nomesAlunosCerto[indiceAlunoEncontrado]} fez Exame Final?(Sim/Não)`)
+            while(fezRecuperaçãoNota !== "Sim" && fezRecuperaçãoNota !== "sim" && fezRecuperaçãoNota !== "Não" && fezRecuperaçãoNota !== "não" && fezRecuperaçãoNota !== "Nao" && fezRecuperaçãoNota !== "nao"){
+
+                console.log("[ERRO] Digite novamente!");
+                fezRecuperaçãoNota = await rl.question(`${nomesAlunosCerto[indiceAlunoEncontrado]} fez Exame Final?(Sim/Não)`);
+            }
+
+            if (fezRecuperaçãoNota === "Sim" || fezRecuperaçãoNota === "sim"){
+
+                let notaExameFinal = Number(await rl.question(`Qual é a nota do (da) ${nomesAlunosCerto[indiceAlunoEncontrado]}?`));
+                while (notaExameFinal === "" || Number(notaExameFinal) < 0){
+
+                    console.log("[ERRO] Digite novamente!");
+                    notaExameFinal = await rl.question(`Qual é a nota do (da) ${nomesAlunosCerto[indiceAlunoEncontrado]}?`);
+                }
+
+                let exameFinal = (resultadoNotaFinal + notaExameFinal) / 2;
+
+                exameFinalNota[indiceAlunoEncontrado] = exameFinal
+
+                if(exameFinal >= 5){
+                    console.clear();
+                    console.log(`${nomesAlunosCerto[indiceAlunoEncontrado]} Aprovado!`);
+                }
+                else{
+                    console.clear();
+                    console.log(`${nomesAlunosCerto[indiceAlunoEncontrado]} Reprovado!`);
+                }
+            }
+            else{
+                console.clear();
+                console.log(`${nomesAlunosCerto[indiceAlunoEncontrado]} Reprovado por NÃO fazer a Prova!`);
+            }
         }
+
+        await Parar();
 }
 //----------------------------------------------------------------------
 
@@ -265,9 +310,10 @@ async function listaAlunos () {
     console.log(" LISTA DE ALUNOS");
     console.log("=================");
     
+    const nomesAlunosCerto = nomesAlunos.map(nome => nome[0].toUpperCase() + nome.slice(1));
 
     if (nomesAlunos.length > 0){
-    nomesAlunos.forEach ((Alunos, index) => {
+    nomesAlunosCerto.forEach ((Alunos, index) => {
 
         console.log("------------------------");
         console.log(`${index+1}.`);
@@ -279,6 +325,20 @@ async function listaAlunos () {
         if (resultadoNotasFinal[index] !== undefined){
 
         console.log(`Media Final: ${resultadoNotasFinal[index].toFixed(2)}`)
+
+        if (resultadoNotasFinal[index] >= 7){
+
+            console.log(`${Alunos} Aprovado!`)
+        }
+        else{
+            console.log(`${Alunos} Reprovado!`)
+
+            if (exameFinalNota[index] >= 5){
+                console.log(`${Alunos} Aprovado Por Exame Final!`)
+                console.log(`Nota do Exame Final: ${exameFinalNota[index].toFixed(2)}`)
+            }
+        }
+
         }
         else{
             console.log("Sem notas cadastradas")
