@@ -21,9 +21,6 @@ async function Parar() {
     let idadesAlunos = [];
     let seriesAlunos = [];
     let generosAlunos = [];
-    let notasUm = [];
-    let notasDois = [];
-    let notasTres = [];
     let resultadoNotasFinal = [];
     let exameFinalNota = [];
 
@@ -123,6 +120,33 @@ async function pesquisarAlunos () {
         return;
 }
 //----------------------------------------------------------------------
+async function  estatísticaTurma() {
+    
+    console.clear();
+    console.log("===================")
+    console.log(" ESTATISTICA TURMA")
+    console.log("===================")
+
+    if (nomesAlunos <= 0){
+        console.log("Sem Alunos cadastrados ou  Notas!")
+        await Parar();
+    }
+    else{
+    let estatistica = 0
+    let notaEstatisticaTurma = 0
+
+    for (let indice = 0; indice < nomesAlunos.length; indice++){
+
+        notaEstatisticaTurma = resultadoNotasFinal[indice] + notaEstatisticaTurma
+    }
+
+    estatistica = notaEstatisticaTurma / nomesAlunos.length
+    console.log(`Media da turma: ${estatistica.toFixed(2)}`)
+    await Parar();
+    }
+    return;
+}
+//----------------------------------------------------------------------
 async function notasAlunos( ) {
 
     console.clear();
@@ -173,8 +197,6 @@ async function notasAlunos( ) {
         notaUm = Number(await rl.question(`Qual é a primeira nota do (a) ${qualAlunoNota}? R: `));
     }
 
-    console.clear();
-
     let fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
 
@@ -203,8 +225,6 @@ async function notasAlunos( ) {
         console.log("[ERRO] Digite novamente!");
         notaDois = Number(await rl.question(`Qual é a segunda nota do (a) ${qualAlunoNota}? R: `));
     }
-
-    console.clear();
 
     fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
         while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
@@ -236,8 +256,6 @@ async function notasAlunos( ) {
         notaTres = Number(await rl.question(`Qual é a terceira nota do (a) ${qualAlunoNota}? R: `));
     }
 
-    console.clear();
-
     fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
 
@@ -256,7 +274,9 @@ async function notasAlunos( ) {
         notaTres = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         }
 
-    }
+    }   
+        console.clear();
+
         let resultadoNotaFinal = (notaUm + notaDois + notaTres) / 3;
         resultadoNotasFinal[indiceAlunoEncontrado] = resultadoNotaFinal;
     
@@ -272,6 +292,8 @@ async function notasAlunos( ) {
             }
 
             if (fezRecuperaçãoNota === "Sim" || fezRecuperaçãoNota === "sim"){
+
+                console.clear();
 
                 let notaExameFinal = Number(await rl.question(`Qual é a nota do (da) ${nomesAlunosCerto[indiceAlunoEncontrado]}?`));
                 while (notaExameFinal === "" || Number(notaExameFinal) < 0){
@@ -350,7 +372,10 @@ async function listaAlunos () {
         console.log("Sem cadastros feitos...");
         await Parar ();
     }
+    console.clear();
+    return;
 }
+//----------------------------------------------------------------------
 async function Executar () {
 
     let escolha = "";
@@ -384,6 +409,10 @@ async function Executar () {
     }
     else if (escolha === "4"){
         await notasAlunos();
+        console.clear();
+    }
+    else if (escolha === "5"){
+        await estatísticaTurma();
         console.clear();
     }
     
