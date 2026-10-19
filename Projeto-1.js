@@ -132,6 +132,20 @@ async function  estatísticaTurma() {
         await Parar();
     }
     else{
+        console.log("==============")
+        console.log(" 1- Turma")
+        console.log(" 2- Meninos")
+        console.log(" 3- Meninas")
+        console.log(" 4- Voltar")
+        console.log("==============")
+        let escolhaEstatistica = Number(await rl.question("Qual estatistica deseja ver? R: "))
+        while(escolhaEstatistica !== 1 && escolhaEstatistica !== 2 && escolhaEstatistica !== 3 && escolhaEstatistica !== 4){
+
+            console.log("[ERRO] Digite novamente!");
+            escolhaEstatistica = Number(await rl.question("Qual estatistica deseja ver? R: "))
+        }
+        if(escolhaEstatistica === 1){
+
     let estatistica = 0
     let notaEstatisticaTurma = 0
 
@@ -144,6 +158,7 @@ async function  estatísticaTurma() {
     console.log(`Media da turma: ${estatistica.toFixed(2)}`)
     await Parar();
     }
+}
     return;
 }
 //----------------------------------------------------------------------
