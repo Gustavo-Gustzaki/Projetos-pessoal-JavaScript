@@ -121,6 +121,9 @@ async function pesquisarAlunos () {
 }
 //----------------------------------------------------------------------
 async function  estatísticaTurma() {
+
+    let notasMasculino = [];
+    let notaFeminino = [];
     
     console.clear();
     console.log("===================")
@@ -132,7 +135,6 @@ async function  estatísticaTurma() {
         await Parar();
     }
     else{
-        console.log("==============")
         console.log(" 1- Turma")
         console.log(" 2- Meninos")
         console.log(" 3- Meninas")
@@ -155,8 +157,26 @@ async function  estatísticaTurma() {
     }
 
     estatistica = notaEstatisticaTurma / nomesAlunos.length
-    console.log(`Media da turma: ${estatistica.toFixed(2)}`)
+    console.log("=======================")
+    console.log(` Media da turma: ${estatistica.toFixed(2)}`)
+    console.log("=======================")
     await Parar();
+    }
+    else if(escolhaEstatistica === 2){
+
+        for (let indice = 0; indice < nomesAlunos.length; indice++){
+
+            if (generosAlunos[indice] === "Masculino" || generosAlunos[indice] === "masculino"){
+
+                notasMasculino = notasAlunos[indice] + notasMasculino
+                
+                console.log("=======================")
+                console.log(`Media dos Garotos: ${notasMasculino}`)
+            }
+            else{
+            console.log("sem notas cadastradas...")
+    }
+        }
     }
 }
     return;
