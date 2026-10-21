@@ -22,6 +22,8 @@ async function Parar() {
     let generosAlunos = [];
     let resultadoNotasFinal = [];
     let exameFinalNota = [];
+    let loginUsuário = [];
+    let loginSenha = [];
 
 async function CadastroAlunos() {
 
@@ -33,6 +35,7 @@ async function CadastroAlunos() {
     let desejaCadastrarAluno = await rl.question("Deseja cadastrar algum aluno? ");
     while (desejaCadastrarAluno !== "sim" && desejaCadastrarAluno !== "não" && desejaCadastrarAluno !== "s" && desejaCadastrarAluno !== "n"){
 
+    console.clear();
     console.log("[ERRO] digite novamente!");
     desejaCadastrarAluno = await rl.question("Deseja cadastrar algum aluno? ");
     
@@ -42,12 +45,14 @@ async function CadastroAlunos() {
         let nomeAluno = await rl.question("Qual é o nome do  Aluno? ");
         while (nomeAluno === ""){
 
+            console.clear();
             console.log("[ERRO] Digite novamente!");
             nomeAluno = await rl.question("Qual é o nome do Aluno? ");
         }
         let idadeAluno = await rl.question(`Qual a idade do (a) ${nomeAluno}? `);
         while (idadeAluno === "" || Number(idadeAluno) <= 0){
 
+            console.clear();
             console.log("[ERRO] Digite novamente!");
             idadeAluno = await rl.question(`Qual a idade do (a) ${nomeAluno}? `);
 
@@ -56,6 +61,7 @@ async function CadastroAlunos() {
         let serieAluno = await rl.question(`Qual é a serie do (a) ${nomeAluno}?(apenas número) `);
         while (serieAluno === "" || Number(serieAluno) <= 0){
 
+            console.clear();
             console.log("[ERRO] Digite novamente!");
             serieAluno = await rl.question(`Qual é a serie do (a) ${nomeAluno}?(apenas número) `);
 
@@ -64,6 +70,7 @@ async function CadastroAlunos() {
         let generoAluno = await rl.question(`Qual é o genero do (a) ${nomeAluno}?(Masculino/Feminino) `);
         while (generoAluno !== "masculino" && generoAluno !== "Masculino" && generoAluno !== "Feminino" && generoAluno !== "feminino"){
 
+            console.clear();
             console.log("[ERRO] Digite novamente!");
             generoAluno = await rl.question(`Qual é o genero do (a) ${nomeAluno}?(Masculino/Feminino) `)
         }
@@ -90,6 +97,7 @@ async function pesquisarAlunos () {
     let qualAlunopesquisar = await rl.question("Qual aluno Você quer pesquisar? ");
     while (qualAlunopesquisar === "" ){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         qualAlunopesquisar = await rl.question("Qual aluno Você quer pesquisar? ");
     }
@@ -113,7 +121,7 @@ async function pesquisarAlunos () {
         }
     }
     if (!alunoEncontrado){
-            console.log("Não encontrado!")
+            console.log("Aluno não encontrado!")
         }
         await Parar();
         return;
@@ -128,19 +136,24 @@ async function deletarAluno() {
     let escolhadeletar = await rl.question("Deseja deletar um Aluno?");
     while(escolhadeletar !== "Sim" && escolhadeletar !== "sim" && escolhadeletar !== "Não" && escolhadeletar !== "Nao" && escolhadeletar !== "não" && escolhadeletar !== "nao"){
         
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         escolhadeletar = await rl.question("Deseja deletar um Aluno?");
     }
     if(escolhadeletar.toLocaleLowerCase() === "sim"){
 
+        console.clear();
         let qualAlunopesquisar = await rl.question("Qual Aluno Você quer pesquisar? R: ")
         while(qualAlunopesquisar === ""){
 
+            console.clear();
             console.log("[ERRO] Digite novamente!");
             qualAlunopesquisar = await rl.question("Qual Aluno Você quer pesquisar? R: ")
         }
 
         const nomesAlunosCerto = nomesAlunos.map(nome => nome[0].toUpperCase() + nome.slice(1));
+
+        console.clear();
 
         for (let indice = 0; indice < nomesAlunos.length;indice++){
 
@@ -158,7 +171,8 @@ async function deletarAluno() {
         console.clear();
         let temCertezaExcluir = await rl.question("Tem certeza que deseja excluir esse aluno (a)? R: ")
         while(temCertezaExcluir !== "Sim" && temCertezaExcluir !== "sim" && temCertezaExcluir !== "Não" && temCertezaExcluir !== "Nao" && temCertezaExcluir !== "não" && temCertezaExcluir !== "nao"){
-        
+            
+            console.clear();
             console.log("[ERRO] Digite novamente!");
             temCertezaExcluir = await rl.question("Tem certeza que deseja excluir esse aluno (a)? R: ")
         }
@@ -169,6 +183,7 @@ async function deletarAluno() {
             seriesAlunos.splice(indice, 1);
             generosAlunos.splice(indice, 1);
 
+            console.clear();
             console.log(`${nomesAlunosCerto[indice]} excluido com Sucesso!`)
         }
         else{
@@ -207,47 +222,47 @@ async function  estatísticaTurma() {
         }
         if(escolhaEstatistica === 1){
     
-        console.clear();
-        let estatistica = 0
-        let notaEstatisticaTurma = 0
+            console.clear();
+            let estatistica = 0
+            let notaEstatisticaTurma = 0
 
-        for (let indice = 0; indice < nomesAlunos.length; indice++){
+            for (let indice = 0; indice < nomesAlunos.length; indice++){
 
-            notaEstatisticaTurma = resultadoNotasFinal[indice] + notaEstatisticaTurma
-        }
+                notaEstatisticaTurma = resultadoNotasFinal[indice] + notaEstatisticaTurma
+            }
 
-        estatistica = notaEstatisticaTurma / nomesAlunos.length
-        console.log("=======================")
-        console.log(` Media da turma: ${estatistica.toFixed(2)}`)
-        console.log("=======================")
-        await Parar();
+            estatistica = notaEstatisticaTurma / nomesAlunos.length
+            console.log("=======================")
+            console.log(` Media da turma: ${estatistica.toFixed(2)}`)
+            console.log("=======================")
+            await Parar();
         }
         else if(escolhaEstatistica === 2){
         
-        console.clear();
-        let notasMasculino = 0
-        let mediaMasculino = 0
-        let quantidadeMasculino = 0
+            console.clear();
+            let notasMasculino = 0
+            let mediaMasculino = 0
+            let quantidadeMasculino = 0
 
-        for (let indice = 0; indice < nomesAlunos.length; indice++){
+            for (let indice = 0; indice < nomesAlunos.length; indice++){
 
-            if (generosAlunos[indice].toLocaleLowerCase() === "masculino"){
+                if (generosAlunos[indice].toLocaleLowerCase() === "masculino"){
 
-                notasMasculino = resultadoNotasFinal[indice] + notasMasculino
-                quantidadeMasculino++
-                mediaMasculino = notasMasculino / quantidadeMasculino
+                    notasMasculino = resultadoNotasFinal[indice] + notasMasculino
+                    quantidadeMasculino++
+                    mediaMasculino = notasMasculino / quantidadeMasculino
+                }
+                else{
+                console.log("sem notas cadastradas...");
+                await Parar();
+                return;
+                }
             }
-            else{
-            console.log("sem notas cadastradas...");
-            await Parar();
-            return;
+            if(notasMasculino > 0){
+                console.log("=======================");
+                console.log(`Media dos Garotos: ${mediaMasculino.toFixed(2)}`);
+                await Parar();
             }
-        }
-        if(notasMasculino > 0){
-            console.log("=======================");
-            console.log(`Media dos Garotos: ${mediaMasculino.toFixed(2)}`);
-            await Parar();
-        }
         }
         else if (escolhaEstatistica === 3){
             
@@ -276,12 +291,12 @@ async function  estatísticaTurma() {
                 console.log(`Media das garotas: ${mediaFeminino.toFixed(2)}`);
                 await Parar();
             }
-    }
-    else{
-        console.clear();
-        console.log("Saindo...")
-        await Parar();
-    }
+        }
+        else{
+            console.clear();
+            console.log("Saindo...")
+            await Parar();
+        }
     }
     return;
 }
@@ -296,6 +311,7 @@ async function notasAlunos( ) {
     let qualAlunoNota = await rl.question("Qual aluno Você quer pesquisar? R: ");
     while (qualAlunoNota === "" ){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         qualAlunoNota = await rl.question("Qual aluno Você quer pesquisar? R: ");
     }
@@ -332,13 +348,16 @@ async function notasAlunos( ) {
     let notaUm = Number(await rl.question(`Qual é a primeira nota do (a) ${qualAlunoNota}? R: `));
     while (notaUm === "" || Number(notaUm) < 0){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         notaUm = Number(await rl.question(`Qual é a primeira nota do (a) ${qualAlunoNota}? R: `));
     }
 
+    console.clear();
     let fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     }
@@ -350,6 +369,7 @@ async function notasAlunos( ) {
         notaUm = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         while (notaUm === "" || Number(notaUm) < 0){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         notaUm = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
 
@@ -361,13 +381,16 @@ async function notasAlunos( ) {
     let notaDois = Number(await rl.question(`Qual é a segunda nota do (a) ${qualAlunoNota}? R: `));
     while (notaDois === "" || Number(notaDois) < 0){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         notaDois = Number(await rl.question(`Qual é a segunda nota do (a) ${qualAlunoNota}? R: `));
     }
 
+    console.clear();
     fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
         while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     }
@@ -379,6 +402,7 @@ async function notasAlunos( ) {
         notaDois = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         while (notaDois === "" || Number(notaDois) < 0){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         notaDois = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
 
@@ -391,13 +415,16 @@ async function notasAlunos( ) {
     let notaTres = Number(await rl.question(`Qual é a terceira nota do (a) ${qualAlunoNota}? R: `));
     while (notaTres === "" || Number(notaTres) < 0){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         notaTres = Number(await rl.question(`Qual é a terceira nota do (a) ${qualAlunoNota}? R: `));
     }
 
+    console.clear();
     fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     while (fezRecuperação !== "Sim" && fezRecuperação !== "sim" && fezRecuperação !== "Não" && fezRecuperação !== "Não" && fezRecuperação !== "não" && fezRecuperação !== "nao"){
-
+    
+    console.clear();
     console.log("[ERRO] Digite novamente!");
     fezRecuperação = await rl.question("Fez recuperação dessa nota? R: ")
     }
@@ -409,6 +436,7 @@ async function notasAlunos( ) {
         notaTres = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         while (notaTres === "" || Number(notaTres) < 0){
 
+        console.clear();
         console.log("[ERRO] Digite novamente!");
         notaTres = Number(await rl.question(`Qual é a nota de recuperação do (a) ${qualAlunoNota}? R: `));
         }
@@ -437,6 +465,7 @@ async function notasAlunos( ) {
                 let notaExameFinal = Number(await rl.question(`Qual é a nota do (da) ${nomesAlunosCerto[indiceAlunoEncontrado]}?`));
                 while (notaExameFinal === "" || Number(notaExameFinal) < 0){
 
+                    console.clear();
                     console.log("[ERRO] Digite novamente!");
                     notaExameFinal = await rl.question(`Qual é a nota do (da) ${nomesAlunosCerto[indiceAlunoEncontrado]}?`);
                 }
@@ -515,9 +544,112 @@ async function listaAlunos () {
     return;
 }
 //----------------------------------------------------------------------
+async function login () {
+    
+    let loginOqueFazer = "";
+    console.clear();
+    do{
+        console.log("===================");
+        console.log(" LOGIN DE USUÁRIO");
+        console.log("===================");
+        console.log(" 1-Entrar")
+        console.log(" 2-Cadastrar")
+        console.log(" 3-Sair")
+        console.log("===================")
+        loginOqueFazer = await rl.question("Oque deseja fazer? R: ")
+        while(loginOqueFazer !== "1" && loginOqueFazer !== "2" && loginOqueFazer !== "3"){
+
+            console.clear();
+            console.log("[ERRO] Digite novamente!");
+            loginOqueFazer = await rl.question("Oque deseja fazer? R: ")
+        }
+        
+        if(loginOqueFazer === "2"){
+            console.clear();
+            console.log("=====================")
+            console.log(" CADASTRO DE USUÁRIO")
+            console.log("=====================")
+            let nomeLoginUsuario = await rl.question("Qual é o nome do usuário? R: ");
+            while (nomeLoginUsuario === "") {
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                nomeLoginUsuario = await rl.question("Qual é o nome do usuário? R: ");
+            }
+
+            let senhaLoginUsuario = await rl.question("Qual é a senha do usuário? R: ");
+            while (senhaLoginUsuario === "") {
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                senhaLoginUsuario = await rl.question("Qual é a senha do usuário? R: ");
+            }
+
+            loginUsuário.push(nomeLoginUsuario);
+            loginSenha.push(senhaLoginUsuario);
+
+            console.clear();
+            console.log("Usuário cadastrado com sucesso!");
+            await Parar();
+        }
+        else{
+
+            console.clear();
+
+            console.log("==================")
+            console.log(" LOGIN DE USUÁRIO")
+            console.log("==================")
+            let nomeLoginUsuario = await rl.question("Qual é o nome do usuário? R: ");
+            while (nomeLoginUsuario === "") {
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                nomeLoginUsuario = await rl.question("Qual é o nome do usuário? R: ");
+            }
+
+            let senhaLoginUsuario = await rl.question("Qual é a senha do usuário? R: ");
+            while (senhaLoginUsuario === "") {
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                senhaLoginUsuario = await rl.question("Qual é a senha do usuário? R: ");
+            }
+
+            let usuarioEncontrado = false;
+
+            for (let i = 0; i < loginUsuário.length; i++) {
+                if (nomeLoginUsuario === loginUsuário[i] && senhaLoginUsuario === loginSenha[i]) {
+                    usuarioEncontrado = true;
+                    break;
+                }
+            }
+
+            if (usuarioEncontrado) {
+
+                console.clear();
+                console.log("Login realizado com sucesso!");
+                await Parar();
+                return Executar();
+            } else {
+
+                console.clear();
+                console.log("Usuário ou senha incorretos!");
+                
+                await Parar();
+            }
+        }
+    }while(loginOqueFazer !== "3");
+
+    console.log("Saindo do sistema...")
+    rl.close();
+}
+//----------------------------------------------------------------------
+
 async function Executar () {
 
     let escolha = "";
+
+    console.clear();
 
     do{
     
@@ -563,4 +695,4 @@ async function Executar () {
     } while (escolha !== "7");
     rl.close();
 }
-Executar();
+login();
