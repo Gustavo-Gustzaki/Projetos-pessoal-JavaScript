@@ -1,6 +1,5 @@
 import console from 'console';
 import Readline from 'readline/promises';
-import { PassThrough } from 'stream';
 
 const rl = Readline.createInterface({
     input: process.stdin,
@@ -120,21 +119,81 @@ async function pesquisarAlunos () {
         return;
 }
 //----------------------------------------------------------------------
+async function deletarAluno() {
+    
+    console.clear();
+    console.log("================");
+    console.log(" DELETAR ALUNOS");
+    console.log("================");
+    let escolhadeletar = await rl.question("Deseja deletar um Aluno?");
+    while(escolhadeletar !== "Sim" && escolhadeletar !== "sim" && escolhadeletar !== "Não" && escolhadeletar !== "Nao" && escolhadeletar !== "não" && escolhadeletar !== "nao"){
+        
+        console.log("[ERRO] Digite novamente!");
+        escolhadeletar = await rl.question("Deseja deletar um Aluno?");
+    }
+    if(escolhadeletar.toLocaleLowerCase() === "sim"){
+
+        let qualAlunopesquisar = await rl.question("Qual Aluno Você quer pesquisar? R: ")
+        while(qualAlunopesquisar === ""){
+
+            console.log("[ERRO] Digite novamente!");
+            qualAlunopesquisar = await rl.question("Qual Aluno Você quer pesquisar? R: ")
+        }
+
+        const nomesAlunosCerto = nomesAlunos.map(nome => nome[0].toUpperCase() + nome.slice(1));
+
+        for (let indice = 0; indice < nomesAlunos.length;indice++){
+
+        if (qualAlunopesquisar.toLocaleLowerCase() === nomesAlunos[indice].toLocaleLowerCase()){
+
+            console.clear();
+            console.log("Aluno encontrado!")
+            console.log("------------------------");
+            console.log(`${indice+1}.`);
+            console.log(`Nome: ${nomesAlunosCerto[indice]}`);
+            console.log(`Idade: ${idadesAlunos[indice]} anos`);
+            console.log(`Série: ${seriesAlunos[indice]} ano`);
+            console.log(`Genero: ${generosAlunos[indice]}`);
+        }
+        console.clear();
+        let temCertezaExcluir = await rl.question("Tem certeza que deseja excluir esse aluno (a)? R: ")
+        while(temCertezaExcluir !== "Sim" && temCertezaExcluir !== "sim" && temCertezaExcluir !== "Não" && temCertezaExcluir !== "Nao" && temCertezaExcluir !== "não" && temCertezaExcluir !== "nao"){
+        
+            console.log("[ERRO] Digite novamente!");
+            temCertezaExcluir = await rl.question("Tem certeza que deseja excluir esse aluno (a)? R: ")
+        }
+        if(temCertezaExcluir.toLocaleLowerCase() === "sim"){
+
+            nomesAlunos.splice(indice, 1);
+            idadesAlunos.splice(indice, 1);
+            seriesAlunos.splice(indice, 1);
+            generosAlunos.splice(indice, 1);
+
+            console.log(`${nomesAlunosCerto[indice]} excluido com Sucesso!`)
+        }
+        else{
+            return;
+        }
+    }
+    await Parar();
+    }
+    return;
+}
+//----------------------------------------------------------------------
 async function  estatísticaTurma() {
 
-    let notasMasculino = [];
-    let notaFeminino = [];
     
     console.clear();
     console.log("===================")
     console.log(" ESTATISTICA TURMA")
     console.log("===================")
 
-    if (nomesAlunos <= 0){
+    if (nomesAlunos.length === 0){
         console.log("Sem Alunos cadastrados ou  Notas!")
         await Parar();
     }
     else{
+        
         console.log(" 1- Turma")
         console.log(" 2- Meninos")
         console.log(" 3- Meninas")
@@ -147,38 +206,83 @@ async function  estatísticaTurma() {
             escolhaEstatistica = Number(await rl.question("Qual estatistica deseja ver? R: "))
         }
         if(escolhaEstatistica === 1){
-
-    let estatistica = 0
-    let notaEstatisticaTurma = 0
-
-    for (let indice = 0; indice < nomesAlunos.length; indice++){
-
-        notaEstatisticaTurma = resultadoNotasFinal[indice] + notaEstatisticaTurma
-    }
-
-    estatistica = notaEstatisticaTurma / nomesAlunos.length
-    console.log("=======================")
-    console.log(` Media da turma: ${estatistica.toFixed(2)}`)
-    console.log("=======================")
-    await Parar();
-    }
-    else if(escolhaEstatistica === 2){
+    
+        console.clear();
+        let estatistica = 0
+        let notaEstatisticaTurma = 0
 
         for (let indice = 0; indice < nomesAlunos.length; indice++){
 
-            if (generosAlunos[indice] === "Masculino" || generosAlunos[indice] === "masculino"){
+            notaEstatisticaTurma = resultadoNotasFinal[indice] + notaEstatisticaTurma
+        }
 
-                notasMasculino = notasAlunos[indice] + notasMasculino
-                
-                console.log("=======================")
-                console.log(`Media dos Garotos: ${notasMasculino}`)
+        estatistica = notaEstatisticaTurma / nomesAlunos.length
+        console.log("=======================")
+        console.log(` Media da turma: ${estatistica.toFixed(2)}`)
+        console.log("=======================")
+        await Parar();
+        }
+        else if(escolhaEstatistica === 2){
+        
+        console.clear();
+        let notasMasculino = 0
+        let mediaMasculino = 0
+        let quantidadeMasculino = 0
+
+        for (let indice = 0; indice < nomesAlunos.length; indice++){
+
+            if (generosAlunos[indice].toLocaleLowerCase() === "masculino"){
+
+                notasMasculino = resultadoNotasFinal[indice] + notasMasculino
+                quantidadeMasculino++
+                mediaMasculino = notasMasculino / quantidadeMasculino
             }
             else{
-            console.log("sem notas cadastradas...")
-    }
+            console.log("sem notas cadastradas...");
+            await Parar();
+            return;
+            }
         }
+        if(notasMasculino > 0){
+            console.log("=======================");
+            console.log(`Media dos Garotos: ${mediaMasculino.toFixed(2)}`);
+            await Parar();
+        }
+        }
+        else if (escolhaEstatistica === 3){
+            
+            console.clear();
+            let notasFeminino = 0
+            let mediaFeminino = 0
+            let quantidadeFeminino = 0
+
+            for (let indice = 0; indice < nomesAlunos.length; indice++){
+
+                if (generosAlunos[indice].toLocaleLowerCase() === "feminino"){
+
+                    notasFeminino = resultadoNotasFinal[indice] + notasFeminino
+                    quantidadeFeminino++
+                    mediaFeminino = notasFeminino / quantidadeFeminino
+
+                    }
+                else{
+                    console.log("sem notas cadastradas...");
+                    await Parar();
+                    return;
+                }
+            }
+            if(notasFeminino > 0){
+                console.log("=======================");
+                console.log(`Media das garotas: ${mediaFeminino.toFixed(2)}`);
+                await Parar();
+            }
     }
-}
+    else{
+        console.clear();
+        console.log("Saindo...")
+        await Parar();
+    }
+    }
     return;
 }
 //----------------------------------------------------------------------
@@ -189,11 +293,11 @@ async function notasAlunos( ) {
     console.log(" NOTAS DE ALUNOS ")
     console.log("=================")
 
-    let qualAlunoNota = await rl.question("Qual aluno Você quer pesquisar?");
+    let qualAlunoNota = await rl.question("Qual aluno Você quer pesquisar? R: ");
     while (qualAlunoNota === "" ){
 
         console.log("[ERRO] Digite novamente!");
-        qualAlunoNota = await rl.question("Qual aluno Você quer pesquisar?");
+        qualAlunoNota = await rl.question("Qual aluno Você quer pesquisar? R: ");
     }
 
     let indiceAlunoEncontrado = -1
@@ -419,12 +523,13 @@ async function Executar () {
     
         console.clear();
     console.log("===========================")
-    console.log(" 1- Cadastrar Aluno")
+    console.log(" 1-Cadastrar Aluno")
     console.log(" 2-Lista Alunos")
     console.log(" 3-Pesquisar Aluno")
     console.log(" 4-Notas Alunos")
     console.log(" 5-ver estatística da turma")
-    console.log(" 6-Sair")
+    console.log(" 6-Excluir Aluno")
+    console.log(" 7-Sair")
     console.log("===========================")
     escolha = await rl.question("Oque deseja fazer agora? R: ")
 
@@ -450,8 +555,12 @@ async function Executar () {
         await estatísticaTurma();
         console.clear();
     }
+    else if (escolha === "6"){
+        await deletarAluno();
+        console.clear();
+    }
     
-    } while (escolha !== "6");
+    } while (escolha !== "7");
     rl.close();
 }
 Executar();
