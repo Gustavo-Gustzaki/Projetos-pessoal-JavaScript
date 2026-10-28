@@ -24,6 +24,10 @@ async function Parar() {
     let exameFinalNota = [];
     let loginUsuário = [];
     let loginSenha = [];
+    let usuarioAdminProfessorAluno = [];
+    usuarioAdminProfessorAluno[0] = "Admin";
+    loginUsuário[0] = "Gustavo-Gustzaki";
+    loginSenha[0] = "13579MestreAdmin";
 
 async function CadastroAlunos() {
 
@@ -587,6 +591,7 @@ async function login () {
 
             loginUsuário.push(nomeLoginUsuario);
             loginSenha.push(senhaLoginUsuario);
+            usuarioAdminProfessorAluno.push("Aluno")
 
             console.clear();
             console.log("Usuário cadastrado com sucesso!");
@@ -629,7 +634,7 @@ async function login () {
                 console.clear();
                 console.log("Login realizado com sucesso!");
                 await Parar();
-                return Executar();
+                return controleContas();
             } else {
 
                 console.clear();
@@ -644,8 +649,161 @@ async function login () {
     rl.close();
 }
 //----------------------------------------------------------------------
+async function controleContas() {
 
-async function Executar () {
+    console.clear;
+    for(let indice = 0; indice < usuarioAdminProfessorAluno.length; indice++){
+        if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("admin")){
+            await ExecutarAdmin();
+            console.clear();
+        }
+        else if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("professor")){
+            await ExecutarProfessor();
+            console.clear();
+        }
+        else if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("aluno")){
+            await ExecutarAluno();
+            console.clear();
+        }
+        else{
+            console.log("Não foi possivel entrar....")
+            await Parar();
+            console.clear();
+            return;
+        }
+    }
+
+    
+}
+//----------------------------------------------------------------------
+async function criarContas() {
+
+    console.clear()
+
+    do{
+
+    
+    console.log("==============");
+    console.log(" CRIAR CONTAS");
+    console.log("==============");
+    console.log(" 1-Admin");
+    console.log(" 2-Professor");
+    console.log(" 3-Aluno");
+    console.log(" 4-Voltar");
+    let criarContasOqueFazer = await rl.question("Oque deseja fazer agora? R: ");
+    while(criarContasOqueFazer === "" && criarContasOqueFazer !== "1" && criarContasOqueFazer !== "2" && criarContasOqueFazer !== "3" && criarContasOqueFazer !== "4"){
+
+        console.log("[ERRO] Digite novamente!");
+        criarContasOqueFazer = await rl.question("Oque deseja fazer agora? R: ");
+    }
+
+    if(criarContasOqueFazer === "1"){
+
+        console.clear();
+        console.log("===================");
+        console.log(" CRIAR CONTA ADMIN");
+        console.log("===================");
+        console.log(" 1- Criar conta");
+        console.log(" 2- Voltar");
+        let escolhaCriarConta = await rl.question("Oque deseja fazer?")
+        if(escolhaCriarConta === "1"){
+            let nomeAdmin = await rl.question("Qual é o nome do Admin? R: ");
+            while(nomeAdmin === ""){
+
+                console.log("[ERRO] Digite novamente!");
+                nomeAdmin = await rl.question("Qual é o nome do Admin? R: ");
+        }
+            let senhaAdmin = await rl.question("Qual é a senha do Admin? R: ");
+            while(nomeAdmin === ""){
+
+                console.log("[ERRO] Digite novamente!");
+                senhaAdmin = await rl.question("Qual é a senha do Admin? R: ");
+            } 
+            loginUsuário.push(nomeAdmin);
+            loginSenha.push(senhaAdmin);
+            usuarioAdminProfessorAluno.push("Admin");
+
+            console.log("Admin cadastrado com sucesso!");
+            await Parar();
+        }
+        else{
+            return;
+        }
+    }
+    else if (criarContasOqueFazer === "2"){
+
+        console.clear();
+        console.log("=======================");
+        console.log(" CRIAR CONTA PROFESSOR");
+        console.log("=======================");
+        console.log(" 1- Criar conta");
+        console.log(" 2- Voltar");
+        let escolhaCriarConta = await rl.question("Oque deseja fazer?")
+        if(escolhaCriarConta === "1"){
+            let nomeProfessor = await rl.question("Qual é o nome do Professor (a)? R: ");
+            while(nomeProfessor === ""){
+
+                console.log("[ERRO] Digite novamente!");
+                nomeProfessor = await rl.question("Qual é o nome do Professor (a)? R: ");
+            }
+            let senhaProfessor = await rl.question("Qual é a senha do Professor (a)? R: ");
+            while(senhaProfessor === ""){
+
+                console.log("[ERRO] Digite novamente!");
+                senhaProfessor = await rl.question("Qual é a senha do Professor (a)? R: ");
+            }
+            loginUsuário.push(nomeProfessor);
+            loginSenha.push(senhaProfessor);
+            usuarioAdminProfessorAluno.push("Professor");
+
+            console.log("Professor (a) cadastrado com sucesso!");
+            await Parar();
+        }
+        else{
+            return;
+        }
+    }
+    else if(criarContasOqueFazer === "3"){
+
+        console.clear();
+        console.log("===================");
+        console.log(" CRIAR CONTA ALUNO");
+        console.log("===================");
+        console.log(" 1- Criar conta");
+        console.log(" 2- Voltar");
+        let escolhaCriarConta = await rl.question("Oque deseja fazer?")
+        if(escolhaCriarConta === "1"){
+            let nomeAluno = await rl.question("Qual é o nome do Aluno (a)? R: ");
+            while(nomeAluno === ""){
+
+                console.log("[ERRO] Digite novamente!");
+                nomeAluno = await rl.question("Qual é o nome do Aluno (a)? R: ");
+            }
+            let senhaAluno =  await rl.question("Qual é a senha do aluno (a)? R: ");
+            while(senhaAluno === ""){
+
+                console.log("[ERRO] Digite novamente!");
+                senhaAluno = await rl.question("Qual é a senha do aluno (a)? R: ");
+            }
+            loginUsuário.push(nomeAluno);
+            loginSenha.push(senhaAluno);
+            usuarioAdminProfessorAluno.push("Aluno");
+
+            console.log("Aluno (a) cadastrado com sucesso!");
+            await Parar();
+        }
+        else{
+            return;
+        }
+
+    }
+    }while(criarContasOqueFazer !== "4"){
+        return;
+    }
+}
+//----------------------------------------------------------------------
+
+async function ExecutarAdmin () {
 
     let escolha = "";
 
@@ -661,7 +819,9 @@ async function Executar () {
     console.log(" 4-Notas Alunos")
     console.log(" 5-ver estatística da turma")
     console.log(" 6-Excluir Aluno")
-    console.log(" 7-Sair")
+    console.log(" 7-Criar contas")
+    console.log(" 8-Voltar")
+    console.log(" 9-Sair")
     console.log("===========================")
     escolha = await rl.question("Oque deseja fazer agora? R: ")
 
@@ -691,8 +851,12 @@ async function Executar () {
         await deletarAluno();
         console.clear();
     }
+    else if (escolha === "7"){
+        await criarContas();
+        console.clear();
+    }
     
-    } while (escolha !== "7");
+    } while (escolha !== "9");
     rl.close();
 }
 login();
