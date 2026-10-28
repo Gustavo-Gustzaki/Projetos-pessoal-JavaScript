@@ -1,4 +1,4 @@
-import console from 'console';
+import console, { log } from 'console';
 import Readline from 'readline/promises';
 
 const rl = Readline.createInterface({
@@ -597,7 +597,7 @@ async function login () {
             console.log("Usuário cadastrado com sucesso!");
             await Parar();
         }
-        else{
+        else if (loginOqueFazer === "1"){
 
             console.clear();
 
@@ -634,47 +634,41 @@ async function login () {
                 console.clear();
                 console.log("Login realizado com sucesso!");
                 await Parar();
-                return controleContas();
-            } else {
-
+                
+                console.clear;
+                for(let indice = 0; indice < usuarioAdminProfessorAluno.length; indice++){
+                    if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("admin") && nomeLoginUsuario === loginUsuário[indice]){
+                        await ExecutarAdmin();
+                        console.clear();
+                    }
+                    else if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("professor") && nomeLoginUsuario === loginUsuário[indice]){
+                    await ExecutarProfessor();
+                    console.clear();
+                    }
+                    else if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("aluno") && nomeLoginUsuario === loginUsuário[indice]){
+                    await ExecutarAluno();
+                    console.clear();
+                    }
+                    else{
+                    console.log("Não foi possivel entrar....")
+                    await Parar();
+                    console.clear();
+                    return;
+                    }
+                }
+            }else {
                 console.clear();
                 console.log("Usuário ou senha incorretos!");
-                
                 await Parar();
             }
         }
     }while(loginOqueFazer !== "3");
 
     console.log("Saindo do sistema...")
+    await Parar();
     rl.close();
 }
 //----------------------------------------------------------------------
-async function controleContas() {
-
-    console.clear;
-    for(let indice = 0; indice < usuarioAdminProfessorAluno.length; indice++){
-        if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("admin")){
-            await ExecutarAdmin();
-            console.clear();
-        }
-        else if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("professor")){
-            await ExecutarProfessor();
-            console.clear();
-        }
-        else if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("aluno")){
-            await ExecutarAluno();
-            console.clear();
-        }
-        else{
-            console.log("Não foi possivel entrar....")
-            await Parar();
-            console.clear();
-            return;
-        }
-    }
-
-    
-}
 //----------------------------------------------------------------------
 async function criarContas() {
 
@@ -725,6 +719,7 @@ async function criarContas() {
 
             console.log("Admin cadastrado com sucesso!");
             await Parar();
+            return;
         }
         else{
             return;
@@ -758,6 +753,7 @@ async function criarContas() {
 
             console.log("Professor (a) cadastrado com sucesso!");
             await Parar();
+            return;
         }
         else{
             return;
@@ -791,6 +787,7 @@ async function criarContas() {
 
             console.log("Aluno (a) cadastrado com sucesso!");
             await Parar();
+            return;
         }
         else{
             return;
@@ -800,6 +797,49 @@ async function criarContas() {
     }while(criarContasOqueFazer !== "4"){
         return;
     }
+}
+//----------------------------------------------------------------------
+async function ExecutarProfessor () {
+
+    let escolha = "";
+
+    console.clear();
+
+    do{
+    
+        console.clear();
+    console.log("===========================")
+    console.log(" 1-Lista Alunos")
+    console.log(" 2-Pesquisar Aluno")
+    console.log(" 3-Notas Alunos")
+    console.log(" 4-ver estatística da turma")
+    console.log(" 5-Voltar")
+    console.log("===========================")
+    escolha = await rl.question("Oque deseja fazer agora? R: ")
+
+    if (escolha === "1"){
+       await listaAlunos();
+       console.clear();
+    }
+
+    else if (escolha === "2"){
+        await pesquisarAlunos();
+        console.clear();
+    }
+
+    else if (escolha === "3"){
+        await notasAlunos();
+        console.clear();
+    }
+    else if (escolha === "4"){
+        await estatísticaTurma();
+        console.clear();
+    }
+    } while (escolha !== "5");
+    console.clear();
+    console.log("Saindo do sistema...")
+    await Parar();
+    return login();
 }
 //----------------------------------------------------------------------
 
@@ -821,7 +861,6 @@ async function ExecutarAdmin () {
     console.log(" 6-Excluir Aluno")
     console.log(" 7-Criar contas")
     console.log(" 8-Voltar")
-    console.log(" 9-Sair")
     console.log("===========================")
     escolha = await rl.question("Oque deseja fazer agora? R: ")
 
@@ -855,8 +894,10 @@ async function ExecutarAdmin () {
         await criarContas();
         console.clear();
     }
-    
-    } while (escolha !== "9");
-    rl.close();
+    }while (escolha !== "8");
+    console.clear();
+    console.log("Saindo do sistema...")
+    await Parar();
+    return login();
 }
 login();
