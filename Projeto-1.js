@@ -799,6 +799,31 @@ async function criarContas() {
     }
 }
 //----------------------------------------------------------------------
+async function ExecutarAluno () {
+
+    let escolha = "";
+
+    console.clear();
+
+    do{
+    
+    console.clear();
+    console.log("===========================")
+    console.log(" 1-Ver notas")
+    console.log(" 2-ver estatística da turma")
+    console.log(" 3-Próximas Avaliações");
+    console.log(" 4-Perfil")
+    console.log(" 5-Voltar")
+    console.log("===========================")
+    escolha = await rl.question("Oque deseja fazer agora? R: ")
+
+    } while (escolha !== "5");
+    console.clear();
+    console.log("Saindo do sistema...")
+    await Parar();
+    return login();
+}
+//----------------------------------------------------------------------
 async function ExecutarProfessor () {
 
     let escolha = "";
@@ -807,14 +832,16 @@ async function ExecutarProfessor () {
 
     do{
     
-        console.clear();
-    console.log("===========================")
+    console.clear();
+    console.log("============================")
     console.log(" 1-Lista Alunos")
     console.log(" 2-Pesquisar Aluno")
-    console.log(" 3-Notas Alunos")
-    console.log(" 4-ver estatística da turma")
-    console.log(" 5-Voltar")
-    console.log("===========================")
+    console.log(" 3-Lançar / Alterar notas")
+    console.log(" 4-Registrar faltas")
+    console.log(" 5-Alunos em Recuperação")
+    console.log(" 6-ver estatística da turma")
+    console.log(" 7-Voltar")
+    console.log("============================")
     escolha = await rl.question("Oque deseja fazer agora? R: ")
 
     if (escolha === "1"){
@@ -831,11 +858,11 @@ async function ExecutarProfessor () {
         await notasAlunos();
         console.clear();
     }
-    else if (escolha === "4"){
+    else if (escolha === "6"){
         await estatísticaTurma();
         console.clear();
     }
-    } while (escolha !== "5");
+    } while (escolha !== "7");
     console.clear();
     console.log("Saindo do sistema...")
     await Parar();
@@ -850,20 +877,27 @@ async function ExecutarAdmin () {
     console.clear();
 
     do{
-    
-        console.clear();
-    console.log("===========================")
-    console.log(" 1-Cadastrar Aluno")
-    console.log(" 2-Lista Alunos")
-    console.log(" 3-Pesquisar Aluno")
-    console.log(" 4-Notas Alunos")
-    console.log(" 5-ver estatística da turma")
-    console.log(" 6-Excluir Aluno")
-    console.log(" 7-Criar contas")
-    console.log(" 8-Voltar")
-    console.log("===========================")
-    escolha = await rl.question("Oque deseja fazer agora? R: ")
-
+    console.log("=============================================");
+    console.log("         ⚙️ PAINEL DO ADMINISTRADOR       ");
+    console.log("=============================================");
+    console.log(" 🟢 GESTÃO DE USUÁRIOS & CONTAS:");
+    console.log("   1 - Criar Novas Contas (Prof/Admin/Aluno)");
+    console.log("   2 - Listar e Bloquear/Ativar Usuários");
+    console.log("   3 - Redefinir Senhas");
+    console.log("");
+    console.log(" 📚 GESTÃO ESCOLAR (TURMAS & DISCIPLINAS):");
+    console.log("   4 - Criar Nova Turma ou Disciplina");
+    console.log("   5 - Matricular Aluno em uma Turma");
+    console.log("   6 - Vincular Professor a uma Turma");
+    console.log("");
+    console.log(" 🔍 CONTROLE DE DADOS (ALUNOS):");
+    console.log("   7 - Buscar / Editar Dados de Aluno");
+    console.log("   8 - Excluir Registro (Aluno/Professor)");
+    console.log("   9 - Backup / Ver Estatísticas Gerais");
+    console.log("");
+    console.log(" 🚪 SISTEMA:");
+    console.log("   10 - Voltar ao Menu Principal");
+    console.log("=============================================");
     if (escolha === "1"){
        await CadastroAlunos();
        console.clear();
