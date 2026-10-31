@@ -22,12 +22,13 @@ async function Parar() {
     let generosAlunos = [];
     let resultadoNotasFinal = [];
     let exameFinalNota = [];
+    let alunoAtivoDesativo = [];
     let loginUsuário = [];
     let loginSenha = [];
     let usuarioAdminProfessorAluno = [];
     usuarioAdminProfessorAluno[0] = "Admin";
-    loginUsuário[0] = "Gustavo-Gustzaki";
-    loginSenha[0] = "13579MestreAdmin";
+    loginUsuário[0] = "1";
+    loginSenha[0] = "1";
 
 async function CadastroAlunos() {
 
@@ -523,13 +524,16 @@ async function listaAlunos () {
         if (resultadoNotasFinal[index] >= 7){
 
             console.log(`${Alunos} Aprovado!`)
+            console.log(`${Alunos}: ${alunoAtivoDesativo[index]}`)
         }
         else{
             console.log(`${Alunos} Reprovado!`)
+            console.log(`${Alunos}: ${alunoAtivoDesativo[index]}`)
 
             if (exameFinalNota[index] >= 5){
                 console.log(`${Alunos} Aprovado Por Exame Final!`)
                 console.log(`Nota do Exame Final: ${exameFinalNota[index].toFixed(2)}`)
+                console.log(`${Alunos}: ${alunoAtivoDesativo[index]}`)
             }
         }
 
@@ -546,6 +550,145 @@ async function listaAlunos () {
     }
     console.clear();
     return;
+}
+//----------------------------------------------------------------------
+async function listaAlunosAdmin () {
+
+    let decisaoListaAlunosAdmin
+
+    do{
+    console.clear();
+    console.log("===================");
+    console.log(" LISTA DE ALUNOS");
+    console.log("===================");
+    console.log(" 1-Ver lista");
+    console.log(" 2-Desativar Aluno");
+    console.log(" 3-Ativar Aluno");
+    console.log(" 4-Voltar");
+    console.log("===================");
+    decisaoListaAlunosAdmin = await rl.question("Oque deseja fazer? R: ");
+    while(decisaoListaAlunosAdmin !== "1" && decisaoListaAlunosAdmin !== "2" && decisaoListaAlunosAdmin !== "3" && decisaoListaAlunosAdmin !== "4"){
+        
+        console.clear();
+        console.log("[ERRO] Digite novamente!");
+        decisaoListaAlunosAdmin = await rl.question("Oque deseja fazer? R: ");
+    }
+    if(decisaoListaAlunosAdmin === "1"){
+
+        console.clear();
+        console.log("===================");
+        console.log(" LISTA DE ALUNOS");
+        console.log("===================");
+        const nomesAlunosCerto = nomesAlunos.map(nome => nome[0].toUpperCase() + nome.slice(1));
+
+        if (nomesAlunos.length > 0){
+        nomesAlunosCerto.forEach ((Alunos, index) => {
+
+            console.log("------------------------");
+            console.log(`${index+1}.`);
+            console.log(`Nome: ${Alunos}`);
+            console.log(`Idade: ${idadesAlunos[index]} anos`);
+            console.log(`Série: ${seriesAlunos[index]} ano`);
+            console.log(`Genero: ${generosAlunos[index]}`);
+
+            if (resultadoNotasFinal[index] !== undefined){
+
+            console.log(`Media Final: ${resultadoNotasFinal[index].toFixed(2)}`)
+
+            if (resultadoNotasFinal[index] >= 7){
+
+                console.log(`${Alunos} Aprovado!`)
+                console.log(`${Alunos}: ${alunoAtivoDesativo[index]}`)
+            }
+            else{
+                console.log(`${Alunos} Reprovado!`)
+                console.log(`${Alunos}: ${alunoAtivoDesativo[index]}`)
+
+                if (exameFinalNota[index] >= 5){
+                    console.log(`${Alunos} Aprovado Por Exame Final!`)
+                    console.log(`Nota do Exame Final: ${exameFinalNota[index].toFixed(2)}`)
+                    console.log(`${Alunos}: ${alunoAtivoDesativo[index]}`)
+                }
+            }
+
+            }
+            else{
+                console.log("Sem notas cadastradas")
+            }
+        })
+        await Parar();
+        }
+        else{
+            console.log("Sem cadastros feitos...");
+            await Parar ();
+        }
+        console.clear();
+        return;
+    }
+    else if (decisaoListaAlunosAdmin === "2"){
+
+        console.clear();
+        console.log("===================");
+        console.log(" LISTA DE ALUNOS");
+        console.log("===================");
+        let qualAlunoDesativar = await rl.question("Qual Aluno você deseja desativar? R: ");
+        while(qualAlunoDesativar === ""){
+
+            console.clear();
+            console.log("[ERRO] Digite novamente!");
+            qualAlunoDesativar = await rl.question("Qual Aluno você deseja desativar? R: ");
+        }
+        for(let indice = 0; indice < nomesAlunos.length; indice++){
+            
+            if(nomesAlunos[indice].toLocaleLowerCase() === qualAlunoDesativar.toLocaleLowerCase()){
+
+                alunoAtivoDesativo[indice].push("desativo");
+                console.log(`${qualAlunoDesativar} desativado com sucesso!`);
+                await Parar();
+                return listaAlunosAdmin();
+            }
+            else{
+                console.log("[ERRO] Digite novamente!");
+                console.log(`${qualAlunoDesativar} não encontrado!`)
+                await Parar();
+                return listaAlunosAdmin();
+            }
+
+        }
+        
+    }
+    else if(decisaoListaAlunosAdmin === "3"){
+
+        console.clear();
+        console.log("===================");
+        console.log(" LISTA DE ALUNOS");
+        console.log("===================");
+        let qualAlunoAtivar = await rl.question("Qual Aluno você deseja Ativar? R: ");
+        while(qualAlunoAtivar === ""){
+
+            console.clear();
+            console.log("[ERRO] Digite novamente!");
+            qualAlunoAtivar = await rl.question("Qual Aluno você deseja Ativar? R: ");
+        }
+        for(let indice = 0; indice < nomesAlunos.length; indice++){
+            
+            if(nomesAlunos[indice].toLocaleLowerCase() === qualAlunoAtivar.toLocaleLowerCase()){
+
+                alunoAtivoDesativo[indice].push("desativo");
+                console.log(`${qualAlunoAtivar} desativado com sucesso!`);
+                await Parar();
+                return listaAlunosAdmin();
+            }
+            else{
+                console.log("[ERRO] Digite novamente!");
+                console.log(`${qualAlunoAtivar} não encontrado!`)
+                await Parar();
+                return listaAlunosAdmin();
+            }
+        }
+    }
+    }while(decisaoListaAlunosAdmin !== "4")
+        return ExecutarAdmin;
 }
 //----------------------------------------------------------------------
 async function login () {
@@ -591,7 +734,8 @@ async function login () {
 
             loginUsuário.push(nomeLoginUsuario);
             loginSenha.push(senhaLoginUsuario);
-            usuarioAdminProfessorAluno.push("Aluno")
+            usuarioAdminProfessorAluno.push("aluno")
+            alunoAtivoDesativo.push("ativo")
 
             console.clear();
             console.log("Usuário cadastrado com sucesso!");
@@ -636,26 +780,34 @@ async function login () {
                 await Parar();
                 
                 console.clear;
+                let UsuárioLogado = false
                 for(let indice = 0; indice < usuarioAdminProfessorAluno.length; indice++){
                     if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("admin") && nomeLoginUsuario === loginUsuário[indice]){
                         await ExecutarAdmin();
                         console.clear();
+                        UsuárioLogado = true
+                        break;
                     }
                     else if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("professor") && nomeLoginUsuario === loginUsuário[indice]){
                     await ExecutarProfessor();
                     console.clear();
+                    UsuárioLogado = true
+                    break;
                     }
                     else if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("aluno") && nomeLoginUsuario === loginUsuário[indice]){
                     await ExecutarAluno();
                     console.clear();
+                    UsuárioLogado = true
+                    break;
                     }
-                    else{
+        
+                }
+                if(UsuárioLogado === false){
                     console.log("Não foi possivel entrar....")
                     await Parar();
                     console.clear();
-                    return;
+                    return login;
                     }
-                }
             }else {
                 console.clear();
                 console.log("Usuário ou senha incorretos!");
@@ -670,9 +822,10 @@ async function login () {
 }
 //----------------------------------------------------------------------
 //----------------------------------------------------------------------
-async function criarContas() {
+async function criarContasAdmin() {
 
     console.clear()
+    let criarContasOqueFazer = ""
 
     do{
 
@@ -684,7 +837,7 @@ async function criarContas() {
     console.log(" 2-Professor");
     console.log(" 3-Aluno");
     console.log(" 4-Voltar");
-    let criarContasOqueFazer = await rl.question("Oque deseja fazer agora? R: ");
+    criarContasOqueFazer = await rl.question("Oque deseja fazer agora? R: ");
     while(criarContasOqueFazer === "" && criarContasOqueFazer !== "1" && criarContasOqueFazer !== "2" && criarContasOqueFazer !== "3" && criarContasOqueFazer !== "4"){
 
         console.log("[ERRO] Digite novamente!");
@@ -716,6 +869,7 @@ async function criarContas() {
             loginUsuário.push(nomeAdmin);
             loginSenha.push(senhaAdmin);
             usuarioAdminProfessorAluno.push("Admin");
+            alunoAtivoDesativo.push("ativo")
 
             console.log("Admin cadastrado com sucesso!");
             await Parar();
@@ -750,6 +904,7 @@ async function criarContas() {
             loginUsuário.push(nomeProfessor);
             loginSenha.push(senhaProfessor);
             usuarioAdminProfessorAluno.push("Professor");
+            alunoAtivoDesativo.push("ativo")
 
             console.log("Professor (a) cadastrado com sucesso!");
             await Parar();
@@ -772,18 +927,21 @@ async function criarContas() {
             let nomeAluno = await rl.question("Qual é o nome do Aluno (a)? R: ");
             while(nomeAluno === ""){
 
+                console.clear();
                 console.log("[ERRO] Digite novamente!");
                 nomeAluno = await rl.question("Qual é o nome do Aluno (a)? R: ");
             }
             let senhaAluno =  await rl.question("Qual é a senha do aluno (a)? R: ");
             while(senhaAluno === ""){
 
+                console.clear();
                 console.log("[ERRO] Digite novamente!");
                 senhaAluno = await rl.question("Qual é a senha do aluno (a)? R: ");
             }
             loginUsuário.push(nomeAluno);
             loginSenha.push(senhaAluno);
-            usuarioAdminProfessorAluno.push("Aluno");
+            usuarioAdminProfessorAluno.push("aluno");
+            alunoAtivoDesativo.push("ativo")
 
             console.log("Aluno (a) cadastrado com sucesso!");
             await Parar();
@@ -795,7 +953,68 @@ async function criarContas() {
 
     }
     }while(criarContasOqueFazer !== "4"){
-        return;
+        return ExecutarAdmin;
+    }
+}
+//----------------------------------------------------------------------
+async function RedefinirSenhasAdmin() {
+    
+    let oqueFazerRedefinirSenhas
+
+    do{
+        console.clear();
+        console.log("==================");
+        console.log(" REDEFINIR SENHAS");
+        console.log("==================");
+        console.log(" 1-Redefinir senha");
+        console.log(" 2-Voltar");
+        oqueFazerRedefinirSenhas = await rl.question("Oque deseja fazer? R: ");
+        while(oqueFazerRedefinirSenhas){
+
+            console.clear();
+            console.log("[ERRO] Digite novamente!");
+            oqueFazerRedefinirSenhas = await rl.question("Oque deseja fazer? R: ");
+        }
+        if(oqueFazerRedefinirSenhas === "1"){
+            let qualPessoaRedefinirSenha = await rl.question("Quem você deseja redefinir a senha?(informe o Usuário) R: ");
+            while(qualPessoaRedefinirSenha === ""){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                qualPessoaRedefinirSenha = await rl.question("Quem você deseja redefinir a senha?(informe o Usuário) R: ");
+            }
+            let usuarioEncontrado = false 
+
+            for(let indice = 0; indice < loginUsuário.length;indice++){
+                
+                if(qualPessoaRedefinirSenha.toLocaleLowerCase() === loginUsuário[indice].toLocaleLowerCase()){
+                    console.clear();
+                    console.log("==================");
+                    console.log(" REDEFINIR SENHAS");
+                    console.log("==================");
+                    let novaSenhaUsuario = await rl.question(`Qual nova senha para o Usuário ${loginUsuário[indice]} R:`)
+                    while(novaSenhaUsuario === ""){
+
+                        console.clear();
+                        console.log("[ERRO] Digite novamente!");
+                        novaSenhaUsuario = await rl.question(`Qual nova senha para o Usuário ${loginUsuário[indice]} R:`)
+                    }
+                    loginSenha[indice] = novaSenhaUsuario
+                    console.log(`Senha do ${loginUsuário[indice]} alterado com sucesso!`)
+                    usuarioEncontrado = true
+                    await Parar();
+                    return ExecutarAdmin();
+                }
+            }
+            if(usuarioEncontrado === false){
+
+                console.log("\n[ERRO] Usuário não encontrado no sistema!");
+                await Parar();
+                return ExecutarAdmin();
+            }
+        }
+    }while(oqueFazerRedefinirSenhas !== "2"){
+        return ExecutarAdmin;
     }
 }
 //----------------------------------------------------------------------
@@ -898,37 +1117,38 @@ async function ExecutarAdmin () {
     console.log(" 🚪 SISTEMA:");
     console.log("   10 - Voltar ao Menu Principal");
     console.log("=============================================");
+    escolha = await rl.question("Oque deseja fazer agora? R: ")
     if (escolha === "1"){
-       await CadastroAlunos();
+       await criarContasAdmin();
        console.clear();
     }
 
     else if (escolha === "2"){
-        await listaAlunos();
+        await listaAlunosAdmin();
         console.clear();
     }
 
     else if (escolha === "3"){
-        await pesquisarAlunos ();
+        await RedefinirSenhasAdmin();
         console.clear();
     }
-    else if (escolha === "4"){
+    else if (escolha === ""){
         await notasAlunos();
         console.clear();
     }
-    else if (escolha === "5"){
+    else if (escolha === ""){
         await estatísticaTurma();
         console.clear();
     }
-    else if (escolha === "6"){
+    else if (escolha === ""){
         await deletarAluno();
         console.clear();
     }
-    else if (escolha === "7"){
+    else if (escolha === ""){
         await criarContas();
         console.clear();
     }
-    }while (escolha !== "8");
+    }while (escolha !== "10");
     console.clear();
     console.log("Saindo do sistema...")
     await Parar();
