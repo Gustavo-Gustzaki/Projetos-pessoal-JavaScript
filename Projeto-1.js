@@ -22,6 +22,7 @@ async function Parar() {
     let generosAlunos = [];
     let resultadoNotasFinal = [];
     let exameFinalNota = [];
+    let TurmasDosAlunos = [];
     let alunoAtivoDesativo = [];
     let loginUsuário = [];
     let loginSenha = [];
@@ -32,61 +33,76 @@ async function Parar() {
 
 async function CadastroAlunos() {
 
-    console.clear();
-    console.log("====================");
-    console.log(" CADASTRO DE ALUNOS");
-    console.log("====================");
+    let oqueFazerCadastroAlunos
+    do{
+        console.clear();
+        console.log("==========================");
+        console.log("    CADASTRO DE ALUNOS");
+        console.log("==========================");
+        console.log(" 1-Cadastrar Aluno");
+        console.log(" 2-Redefinir informações");
+        console.log(" 3-Voltar");
+        console.log("==========================");
 
-    let desejaCadastrarAluno = await rl.question("Deseja cadastrar algum aluno? ");
-    while (desejaCadastrarAluno !== "sim" && desejaCadastrarAluno !== "não" && desejaCadastrarAluno !== "s" && desejaCadastrarAluno !== "n"){
-
-    console.clear();
-    console.log("[ERRO] digite novamente!");
-    desejaCadastrarAluno = await rl.question("Deseja cadastrar algum aluno? ");
-    
-    }
-    if (desejaCadastrarAluno === "sim" || desejaCadastrarAluno === "s"){
-
-        let nomeAluno = await rl.question("Qual é o nome do  Aluno? ");
-        while (nomeAluno === ""){
+        oqueFazerCadastroAlunos = await rl.question("Oque deseja fazer? R: ");
+        while(oqueFazerCadastroAlunos !== "1" && oqueFazerCadastroAlunos !== "2" && oqueFazerCadastroAlunos !== "3"){
 
             console.clear();
             console.log("[ERRO] Digite novamente!");
-            nomeAluno = await rl.question("Qual é o nome do Aluno? ");
+            oqueFazerCadastroAlunos = await rl.question("Oque deseja fazer? R: ");
         }
-        let idadeAluno = await rl.question(`Qual a idade do (a) ${nomeAluno}? `);
-        while (idadeAluno === "" || Number(idadeAluno) <= 0){
+        if(oqueFazerCadastroAlunos === "1"){
 
-            console.clear();
-            console.log("[ERRO] Digite novamente!");
-            idadeAluno = await rl.question(`Qual a idade do (a) ${nomeAluno}? `);
+            let nomeAluno = await rl.question("Qual é o nome do  Aluno? ");
+            while (nomeAluno === ""){
 
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                nomeAluno = await rl.question("Qual é o nome do Aluno? ");
+            }
+            let idadeAluno = await rl.question(`Qual a idade do (a) ${nomeAluno}? `);
+            while (idadeAluno === "" || Number(idadeAluno) <= 0){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                idadeAluno = await rl.question(`Qual a idade do (a) ${nomeAluno}? `);
+
+            }
+
+            let serieAluno = await rl.question(`Qual é a serie do (a) ${nomeAluno}?(apenas número) `);
+            while (serieAluno === "" || Number(serieAluno) <= 0){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                serieAluno = await rl.question(`Qual é a serie do (a) ${nomeAluno}?(apenas número) `);
+
+            }
+
+            let generoAluno = await rl.question(`Qual é o genero do (a) ${nomeAluno}?(Masculino/Feminino) `);
+            while (generoAluno !== "masculino" && generoAluno !== "Masculino" && generoAluno !== "Feminino" && generoAluno !== "feminino"){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                generoAluno = await rl.question(`Qual é o genero do (a) ${nomeAluno}?(Masculino/Feminino) `);
+            }
+            let turmasAlunos = await rl.question(`Qual é a turma do (a) ${nomeAluno}?(Masculino/Feminino) `);
+            while(turmasAlunos === "" && turmasAlunos !== "a" && turmasAlunos !== "A" && turmasAlunos !== "b" && turmasAlunos !== "B" && turmasAlunos !== "c" && turmasAlunos !== "C" && turmasAlunos !== "d" && turmasAlunos !== "D"){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                turmasAlunos = await rl.question(`Qual é a turma do (a) ${nomeAluno}?(Masculino/Feminino) `);
+            }
+
+            
+
+            nomesAlunos.push (nomeAluno);
+            idadesAlunos.push (Number(idadeAluno));
+            seriesAlunos.push (Number(serieAluno));
+            generosAlunos.push (generoAluno);
+            turmasAlunos.push (TurmasDosAlunos);
         }
-
-        let serieAluno = await rl.question(`Qual é a serie do (a) ${nomeAluno}?(apenas número) `);
-        while (serieAluno === "" || Number(serieAluno) <= 0){
-
-            console.clear();
-            console.log("[ERRO] Digite novamente!");
-            serieAluno = await rl.question(`Qual é a serie do (a) ${nomeAluno}?(apenas número) `);
-
-        }
-
-        let generoAluno = await rl.question(`Qual é o genero do (a) ${nomeAluno}?(Masculino/Feminino) `);
-        while (generoAluno !== "masculino" && generoAluno !== "Masculino" && generoAluno !== "Feminino" && generoAluno !== "feminino"){
-
-            console.clear();
-            console.log("[ERRO] Digite novamente!");
-            generoAluno = await rl.question(`Qual é o genero do (a) ${nomeAluno}?(Masculino/Feminino) `)
-        }
-
-        nomesAlunos.push (nomeAluno);
-        idadesAlunos.push (Number(idadeAluno));
-        seriesAlunos.push (Number(serieAluno));
-        generosAlunos.push (generoAluno);
-    } 
-    else{
-        return;
+    }while(oqueFazerCadastroAlunos !== "3"){
+        return ExecutarAdmin();
     }
 }
 //----------------------------------------------------------------------
@@ -118,6 +134,7 @@ async function pesquisarAlunos () {
             console.log(`Nome: ${nomesAlunosCerto[i]}`);
             console.log(`Idade: ${idadesAlunos[i]} anos`);
             console.log(`Série: ${seriesAlunos[i]} ano`);
+            console.log(`Turma: ${TurmasDosAlunos[i]}`)
             console.log(`Genero: ${generosAlunos[i]}`);
             alunoEncontrado = true;
 
@@ -171,6 +188,7 @@ async function deletarAluno() {
             console.log(`Nome: ${nomesAlunosCerto[indice]}`);
             console.log(`Idade: ${idadesAlunos[indice]} anos`);
             console.log(`Série: ${seriesAlunos[indice]} ano`);
+            console.log(`Turma: ${TurmasDosAlunos[indice]}`)
             console.log(`Genero: ${generosAlunos[indice]}`);
         }
         console.clear();
@@ -335,6 +353,7 @@ async function notasAlunos( ) {
             console.log(`Nome: ${nomesAlunosCerto[indice]}`);
             console.log(`Idade: ${idadesAlunos[indice]} anos`);
             console.log(`Série: ${seriesAlunos[indice]} ano`);
+            console.log(`Turma: ${TurmasDosAlunos[indice]}`)
             console.log(`Genero: ${generosAlunos[indice]}`);
             indiceAlunoEncontrado = indice
             break;
@@ -515,6 +534,7 @@ async function listaAlunos () {
         console.log(`Nome: ${Alunos}`);
         console.log(`Idade: ${idadesAlunos[index]} anos`);
         console.log(`Série: ${seriesAlunos[index]} ano`);
+        console.log(`Turma: ${TurmasDosAlunos[index]}`)
         console.log(`Genero: ${generosAlunos[index]}`);
 
         if (resultadoNotasFinal[index] !== undefined){
@@ -589,6 +609,7 @@ async function listaAlunosAdmin () {
             console.log(`Nome: ${Alunos}`);
             console.log(`Idade: ${idadesAlunos[index]} anos`);
             console.log(`Série: ${seriesAlunos[index]} ano`);
+            console.log(`Turma: ${TurmasDosAlunos[index]}`)
             console.log(`Genero: ${generosAlunos[index]}`);
 
             if (resultadoNotasFinal[index] !== undefined){
