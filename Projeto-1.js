@@ -22,7 +22,9 @@ async function Parar() {
     let generosAlunos = [];
     let resultadoNotasFinal = [];
     let exameFinalNota = [];
-    let TurmasDosAlunos = [];
+    let turmasAlunos1 = [];
+    let turmasAlunos2 = [];
+    let turmasAlunos3 = [];
     let alunoAtivoDesativo = [];
     let loginUsuário = [];
     let loginSenha = [];
@@ -85,21 +87,61 @@ async function CadastroAlunos() {
                 console.log("[ERRO] Digite novamente!");
                 generoAluno = await rl.question(`Qual é o genero do (a) ${nomeAluno}?(Masculino/Feminino) `);
             }
-            let turmasAlunos = await rl.question(`Qual é a turma do (a) ${nomeAluno}?(Masculino/Feminino) `);
-            while(turmasAlunos === "" && turmasAlunos !== "a" && turmasAlunos !== "A" && turmasAlunos !== "b" && turmasAlunos !== "B" && turmasAlunos !== "c" && turmasAlunos !== "C" && turmasAlunos !== "d" && turmasAlunos !== "D"){
+            if(serieAluno === "1"){
 
-                console.clear();
-                console.log("[ERRO] Digite novamente!");
-                turmasAlunos = await rl.question(`Qual é a turma do (a) ${nomeAluno}?(Masculino/Feminino) `);
+                if(turmasAlunos1.length === 0){
+
+                    turmasAlunos1.push("A");
+                }
+                
+                
+                else if(turmasAlunos1.length > 30 && turmasAlunos1.includes("A") && !turmasAlunos1.includes("B")){
+
+                    turmasAlunos1.push("B")
+                }
+                else if(turmasAlunos1.length > 60 && turmasAlunos1.includes("B") && !turmasAlunos1.includes("C")){
+
+                    turmasAlunos1.push("C")
+                }
             }
-
             
+            else if(serieAluno === "2"){
+
+                if(turmasAlunos2.length === 0){
+
+                    turmasAlunos2.push("A")
+                }
+            
+                else if(turmasAlunos2.length > 30 && turmasAlunos2.includes("A") && !turmasAlunos2.includes("B")){
+
+                    turmasAlunos2.push("B")
+                }
+                else if(turmasAlunos2.length > 60 && turmasAlunos2.includes("B") && !turmasAlunos2.includes("C")){
+
+                    turmasAlunos2.push("C")
+                }
+            }
+            else if(serieAluno === "3"){
+
+                if(turmasAlunos3.length === 0){
+
+                    turmasAlunos3.push("A")
+                }
+            
+                else if(turmasAlunos3.length > 30 && turmasAlunos3.includes("A") && !turmasAlunos3.includes("B")){
+
+                    turmasAlunos3.push("B")
+                }
+                else if(turmasAlunos3.length > 60 && turmasAlunos3.includes("B") && !turmasAlunos3.includes("C")){
+
+                    turmasAlunos3.push("C")
+                }
+            }
 
             nomesAlunos.push (nomeAluno);
             idadesAlunos.push (Number(idadeAluno));
             seriesAlunos.push (Number(serieAluno));
             generosAlunos.push (generoAluno);
-            turmasAlunos.push (TurmasDosAlunos);
         }
     }while(oqueFazerCadastroAlunos !== "3"){
         return ExecutarAdmin();
@@ -134,7 +176,15 @@ async function pesquisarAlunos () {
             console.log(`Nome: ${nomesAlunosCerto[i]}`);
             console.log(`Idade: ${idadesAlunos[i]} anos`);
             console.log(`Série: ${seriesAlunos[i]} ano`);
-            console.log(`Turma: ${TurmasDosAlunos[i]}`)
+            if(seriesAlunos[i] === "1"){
+            console.log(`Turma: ${turmasAlunos1[i]}`);
+            }
+            else if(seriesAlunos[i] === "2"){
+            console.log(`Turma: ${turmasAlunos2[i]}`);
+            }
+            else if(seriesAlunos[i] === "3"){
+            console.log(`Turma: ${turmasAlunos3[i]}`);
+            }
             console.log(`Genero: ${generosAlunos[i]}`);
             alunoEncontrado = true;
 
@@ -188,7 +238,15 @@ async function deletarAluno() {
             console.log(`Nome: ${nomesAlunosCerto[indice]}`);
             console.log(`Idade: ${idadesAlunos[indice]} anos`);
             console.log(`Série: ${seriesAlunos[indice]} ano`);
-            console.log(`Turma: ${TurmasDosAlunos[indice]}`)
+            if(seriesAlunos[i] === "1"){
+            console.log(`Turma: ${turmasAlunos1[i]}`);
+            }
+            else if(seriesAlunos[i] === "2"){
+            console.log(`Turma: ${turmasAlunos2[i]}`);
+            }
+            else if(seriesAlunos[i] === "3"){
+            console.log(`Turma: ${turmasAlunos3[i]}`);
+            }
             console.log(`Genero: ${generosAlunos[indice]}`);
         }
         console.clear();
@@ -353,7 +411,15 @@ async function notasAlunos( ) {
             console.log(`Nome: ${nomesAlunosCerto[indice]}`);
             console.log(`Idade: ${idadesAlunos[indice]} anos`);
             console.log(`Série: ${seriesAlunos[indice]} ano`);
-            console.log(`Turma: ${TurmasDosAlunos[indice]}`)
+            if(seriesAlunos[i] === "1"){
+            console.log(`Turma: ${turmasAlunos1[i]}`);
+            }
+            else if(seriesAlunos[i] === "2"){
+            console.log(`Turma: ${turmasAlunos2[i]}`);
+            }
+            else if(seriesAlunos[i] === "3"){
+            console.log(`Turma: ${turmasAlunos3[i]}`);
+            }
             console.log(`Genero: ${generosAlunos[indice]}`);
             indiceAlunoEncontrado = indice
             break;
@@ -534,7 +600,15 @@ async function listaAlunos () {
         console.log(`Nome: ${Alunos}`);
         console.log(`Idade: ${idadesAlunos[index]} anos`);
         console.log(`Série: ${seriesAlunos[index]} ano`);
-        console.log(`Turma: ${TurmasDosAlunos[index]}`)
+         if(seriesAlunos[index] === 1){
+            console.log(`Turma: ${turmasAlunos1[index]}`);
+            }
+            else if(seriesAlunos[index] === 2){
+            console.log(`Turma: ${turmasAlunos2[index]}`);
+            }
+            else if(seriesAlunos[index] === 3){
+            console.log(`Turma: ${turmasAlunos3[index]}`);
+            }
         console.log(`Genero: ${generosAlunos[index]}`);
 
         if (resultadoNotasFinal[index] !== undefined){
@@ -800,7 +874,7 @@ async function login () {
                 console.log("Login realizado com sucesso!");
                 await Parar();
                 
-                console.clear;
+                console.clear();
                 let UsuárioLogado = false
                 for(let indice = 0; indice < usuarioAdminProfessorAluno.length; indice++){
                     if(usuarioAdminProfessorAluno[indice].toLocaleLowerCase().includes("admin") && nomeLoginUsuario === loginUsuário[indice]){
@@ -823,11 +897,14 @@ async function login () {
                     }
         
                 }
+                if(UsuárioLogado){
+                    loginOqueFazer = "";
+                    continue
+                }
                 if(UsuárioLogado === false){
                     console.log("Não foi possivel entrar....")
                     await Parar();
                     console.clear();
-                    return login;
                     }
             }else {
                 console.clear();
@@ -837,9 +914,11 @@ async function login () {
         }
     }while(loginOqueFazer !== "3");
 
-    console.log("Saindo do sistema...")
-    await Parar();
-    rl.close();
+    if(loginOqueFazer === "3"){
+         console.log("Saindo do sistema...")
+        await Parar();
+        rl.close();
+    }
 }
 //----------------------------------------------------------------------
 //----------------------------------------------------------------------
@@ -1061,7 +1140,7 @@ async function ExecutarAluno () {
     console.clear();
     console.log("Saindo do sistema...")
     await Parar();
-    return login();
+    return;
 }
 //----------------------------------------------------------------------
 async function ExecutarProfessor () {
@@ -1106,7 +1185,7 @@ async function ExecutarProfessor () {
     console.clear();
     console.log("Saindo do sistema...")
     await Parar();
-    return login();
+    return;
 }
 //----------------------------------------------------------------------
 
@@ -1124,11 +1203,11 @@ async function ExecutarAdmin () {
     console.log("   1 - Criar Novas Contas (Prof/Admin/Aluno)");
     console.log("   2 - Listar e Bloquear/Ativar Usuários");
     console.log("   3 - Redefinir Senhas");
+    console.log("   4 - Cadastro de Alunos");
     console.log("");
     console.log(" 📚 GESTÃO ESCOLAR (TURMAS & DISCIPLINAS):");
-    console.log("   4 - Criar Nova Turma ou Disciplina");
-    console.log("   5 - Matricular Aluno em uma Turma");
-    console.log("   6 - Vincular Professor a uma Turma");
+    console.log("   5 - Disciplinas escolares");
+    console.log("   6 - Professores da escola")
     console.log("");
     console.log(" 🔍 CONTROLE DE DADOS (ALUNOS):");
     console.log("   7 - Buscar / Editar Dados de Aluno");
@@ -1153,8 +1232,8 @@ async function ExecutarAdmin () {
         await RedefinirSenhasAdmin();
         console.clear();
     }
-    else if (escolha === ""){
-        await notasAlunos();
+    else if (escolha === "4"){
+        await CadastroAlunos();
         console.clear();
     }
     else if (escolha === ""){
@@ -1173,6 +1252,6 @@ async function ExecutarAdmin () {
     console.clear();
     console.log("Saindo do sistema...")
     await Parar();
-    return login();
+    return;
 }
 login();
