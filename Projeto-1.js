@@ -740,13 +740,13 @@ async function listaAlunosAdmin () {
                 alunoAtivoDesativo[indice].push("desativo");
                 console.log(`${qualAlunoDesativar} desativado com sucesso!`);
                 await Parar();
-                return listaAlunosAdmin();
+                return listaAlunosAdmin;
             }
             else{
                 console.log("[ERRO] Digite novamente!");
                 console.log(`${qualAlunoDesativar} não encontrado!`)
                 await Parar();
-                return listaAlunosAdmin();
+                return listaAlunosAdmin;
             }
 
         }
@@ -772,13 +772,13 @@ async function listaAlunosAdmin () {
                 alunoAtivoDesativo[indice].push("desativo");
                 console.log(`${qualAlunoAtivar} desativado com sucesso!`);
                 await Parar();
-                return listaAlunosAdmin();
+                return listaAlunosAdmin;
             }
             else{
                 console.log("[ERRO] Digite novamente!");
                 console.log(`${qualAlunoAtivar} não encontrado!`)
                 await Parar();
-                return listaAlunosAdmin();
+                return listaAlunosAdmin;
             }
         }
     }
@@ -1023,6 +1023,12 @@ async function criarContasAdmin() {
         console.log(" 1- Criar conta");
         console.log(" 2- Voltar");
         let escolhaCriarConta = await rl.question("Oque deseja fazer?")
+        while(escolhaCriarConta !== "1" && escolhaCriarConta !== "2"){
+
+            console.clear();
+            console.log("[ERRO] Digite novamente!");
+            escolhaCriarConta = await rl.question("Oque deseja fazer?")
+        }
         if(escolhaCriarConta === "1"){
             let nomeAluno = await rl.question("Qual é o nome do Aluno (a)? R: ");
             while(nomeAluno === ""){
@@ -1054,6 +1060,97 @@ async function criarContasAdmin() {
     }
     }while(criarContasOqueFazer !== "4"){
         return ExecutarAdmin;
+    }
+}
+//----------------------------------------------------------------------
+async function materiasEscolarAdmin () {
+    
+    let oqueFazerMaterias
+    let oqueFazerÁreaConhecimento
+    do{
+        console.clear();
+        console.log("====================");
+        console.log(" MATÉRIAS ESCOLARES");
+        console.log("====================");
+        console.log(" 1-Ver matérias");
+        console.log(" 2-Voltar");
+        oqueFazerMaterias = await rl.question("Oque deseja fazer? R: ");
+        while(oqueFazerMaterias !== "1" && oqueFazerMaterias !== "2"){
+
+            console.clear();
+            console.log("[ERRO] Digite novamente!");
+            oqueFazerMaterias = await rl.question("Oque deseja fazer? R: ");
+        }
+        if(oqueFazerMaterias === "1"){
+
+            console.clear();
+            console.log("==================================");
+            console.log("        MATÉRIAS ESCOLARES");
+            console.log("==================================");
+            console.log(" Escolha a área de conhecimento");
+            console.log(" 1-Linguagens e suas Tecnologias");
+            console.log(" 2-Matemática e suas Tecnologias");
+            console.log(" 3-Ciências da Natureza");
+            console.log(" 4-Ciências Humanas e Sociais");
+            console.log(" 5-Voltar")
+            oqueFazerÁreaConhecimento = await rl.question("Oque deseja ver? R: ");
+                while(oqueFazerÁreaConhecimento !== "1" && oqueFazerÁreaConhecimento !== "2" && oqueFazerÁreaConhecimento !== "3" && oqueFazerÁreaConhecimento !== "4" && oqueFazerÁreaConhecimento !== "5"){
+
+                    console.clear();
+                    console.log("[ERRO] Digite novamente!");
+                    oqueFazerÁreaConhecimento = await rl.question("Oque deseja ver? R: ");
+                }
+                if(oqueFazerÁreaConhecimento === "1"){
+
+                    console.clear();
+                    console.log("=================================");
+                    console.log("  MATÉRIAS ESCOLARES E HORÁRIOS");
+                    console.log("=================================");
+                    console.log(" Língua Portuguesa - 4 Aulas")
+                    console.log(" Língua Inglesa - 2 Aulas")
+                    console.log(" Arte - 1 Aula")
+                    console.log(" Educação Física - 1 Aula")
+                    console.log("=================================");
+                    await Parar()
+                }
+                else if(oqueFazerÁreaConhecimento === "2"){
+
+                    console.clear();
+                    console.log("=================================");
+                    console.log("  MATÉRIAS ESCOLARES E HORÁRIOS");
+                    console.log("=================================");
+                    console.log(" Matemática - 4 Aulas")
+                    console.log("=================================");
+                    await Parar();
+                }
+                else if(oqueFazerÁreaConhecimento === "3"){
+
+                    console.clear();
+                    console.log("=================================");
+                    console.log("  MATÉRIAS ESCOLARES E HORÁRIOS");
+                    console.log("=================================");
+                    console.log(" Biologia - 2 Aulas")
+                    console.log(" Física - 2 Aulas")
+                    console.log(" Química - 2 Aulas")
+                    console.log("=================================");
+                    await Parar();
+                }
+                else if(oqueFazerÁreaConhecimento === "4"){
+
+                    console.clear();
+                    console.log("=================================");
+                    console.log("  MATÉRIAS ESCOLARES E HORÁRIOS");
+                    console.log("=================================");
+                    console.log(" História - 2 Aulas")
+                    console.log(" Geografia - 2 Aulas")
+                    console.log(" Filosofia - 1 Aula")
+                    console.log(" Sociologia - 1 Aulas ")
+                    console.log("=================================");
+                    await Parar();
+                }
+        }
+    }while(oqueFazerMaterias !== "2"){
+        return;
     }
 }
 //----------------------------------------------------------------------
@@ -1236,8 +1333,8 @@ async function ExecutarAdmin () {
         await CadastroAlunos();
         console.clear();
     }
-    else if (escolha === ""){
-        await estatísticaTurma();
+    else if (escolha === "5"){
+        await materiasEscolarAdmin();
         console.clear();
     }
     else if (escolha === ""){
