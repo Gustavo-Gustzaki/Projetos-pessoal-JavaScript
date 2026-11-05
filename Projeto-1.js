@@ -15,23 +15,39 @@ async function Parar() {
 }
 
 //----------------------------------------------------------------------
-
     let nomesAlunos = [];
     let idadesAlunos = [];
     let seriesAlunos = [];
     let generosAlunos = [];
+//---------------------------------Cadastros Alunos
+
     let resultadoNotasFinal = [];
     let exameFinalNota = [];
+//---------------------------------Notas Alunos
+
     let turmasAlunos1 = [];
     let turmasAlunos2 = [];
     let turmasAlunos3 = [];
+//---------------------------------Turmas Alunos
     let alunoAtivoDesativo = [];
     let loginUsuário = [];
     let loginSenha = [];
     let usuarioAdminProfessorAluno = [];
+//---------------------------------Login
+    let professoresNomes = [];
+    let qualMateriaProfessor = [];
+    let anosExperienciaProfessor = [];
+    const materiasValidas = [
+    "Português", "Matemática", "Geografia", "Língua Inglesa", 
+    "Arte", "Educação Fisíca", "Biologia", "Física", 
+    "Química", "História", "Filosofia", "Sociologia"
+];
+//---------------------------------CadastroProfessores
+
     usuarioAdminProfessorAluno[0] = "Admin";
     loginUsuário[0] = "1";
     loginSenha[0] = "1";
+//---------------------------------Senhas
 
 async function CadastroAlunos() {
 
@@ -1063,6 +1079,111 @@ async function criarContasAdmin() {
     }
 }
 //----------------------------------------------------------------------
+async function professoresAdmin () {
+    
+    let oqueFazerProfessores
+    console.clear();
+    console.log("=======================");
+    console.log(" PROFESSORES DA ESCOLA");
+    console.log("=======================");
+    console.log(" 1-Ver Professores");
+    console.log(" 2-Cadastrar Professores");
+    console.log(" 3-Voltar");
+    console.log("=======================");
+    oqueFazerProfessores = await rl.question("Oque deseja fazer? R: ");
+    while(oqueFazerProfessores !== "1" && oqueFazerProfessores !== "2" && oqueFazerProfessores !== "3"){
+
+        console.clear();
+        console.log("[ERRO] Digite novamente!");
+        oqueFazerProfessores = await rl.question("Oque deseja fazer? R: ");
+    }
+    if(oqueFazerProfessores === "1"){
+
+        if(professoresNomes.length > 0){
+            console.clear();
+            console.log("=======================");
+            console.log(" PROFESSORES DA ESCOLA");
+            console.log("=======================");
+            
+            const nomeProfessoresCerto = professoresNomes.map(nome => nome[0].toUpperCase() + nome.slice(1));
+
+            nomeProfessoresCerto.forEach((professor, index)=> {
+                
+                console.log(`${index+1}.`);
+                console.log(`Nome: ${professor}`);
+                console.log(`Matéria: ${qualMateriaProfessor[index]}`);
+                console.log(`Experiência: ${anosExperienciaProfessor[index]}`);
+            });
+            await Parar();
+        }
+        else{
+            console.log("Sem professores cadastrados...")
+            await Parar();
+            return;
+        }
+
+    }
+    else if(oqueFazerProfessores === "2"){
+
+        console.clear();
+        console.log("=========================");
+        console.log(" CADASTRO DE PROFESSORES");
+        console.log("=========================");
+        console.log(" 1-Cadastrar");
+        console.log(" 2-Voltar");
+        console.log("=========================");
+        let oqueFazerProfessores2 = await rl.question("Oque deseja fazer? R: ")
+        while(oqueFazerProfessores2 !== "1" && oqueFazerProfessores2 !== "2" && oqueFazerProfessores2 !== "3"){
+
+            console.clear();
+            console.log("[ERRO] Digite novamente!");
+            oqueFazerProfessores2 = await rl.question("Oque deseja fazer? R: ")
+        }
+        if(oqueFazerProfessores2 === "1"){
+
+            console.clear();
+            console.log("=========================");
+            console.log(" CADASTRO DE PROFESSORES");
+            console.log("=========================");
+            let nomeProfessor = await rl.question("Qual é o nome do Professor (a)? R: ");
+            while(nomeProfessor === ""){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                nomeProfessor = await rl.question("Qual é o nome do Professor (a)? R: ");
+            }
+            let materiaProfessor = await rl.question(`Qual é a matéria do (a) ${nomeProfessor}? R: `);
+            while(!materiasValidas.includes(materiaProfessor)){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!(Verifique os acentos e letra Maiuscula no inicio)");
+                materiaProfessor = await rl.question(`Qual é a matéria do (a) ${nomeProfessor}? R: `);
+            }
+            let anosDeExperiencia = Number(await rl.question(`Quantos anos ele atua como Professor (a)? R: `))
+            while(anosDeExperiencia <= 0 || isNaN(anosDeExperiencia)){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!(Digite um número maior que 0 ou válido)");
+                anosDeExperiencia = Number(await rl.question(`Quantos anos ele atua como Professor (a)? R: `))
+            }
+            console.log("")
+            console.log(`${nomeProfessor} cadastrado com sucesso!`)
+            await Parar();
+
+            professoresNomes.push(nomeProfessor)
+            qualMateriaProfessor.push(materiaProfessor)
+            anosExperienciaProfessor.push(anosDeExperiencia)
+        }
+        else if(oqueFazerProfessores2 === "2"){
+            return;
+        }
+    }
+    else if(oqueFazerProfessores === "3"){
+        return;
+    }
+
+}
+//----------------------------------------------------------------------
 async function materiasEscolarAdmin () {
     
     let oqueFazerMaterias
@@ -1337,8 +1458,8 @@ async function ExecutarAdmin () {
         await materiasEscolarAdmin();
         console.clear();
     }
-    else if (escolha === ""){
-        await deletarAluno();
+    else if (escolha === "6"){
+        await professoresAdmin();
         console.clear();
     }
     else if (escolha === ""){
