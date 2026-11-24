@@ -58,12 +58,11 @@ async function CadastroAlunos() {
         console.log("    CADASTRO DE ALUNOS");
         console.log("==========================");
         console.log(" 1-Cadastrar Aluno");
-        console.log(" 2-Redefinir informações");
-        console.log(" 3-Voltar");
+        console.log(" 2-Voltar");
         console.log("==========================");
 
         oqueFazerCadastroAlunos = await rl.question("Oque deseja fazer? R: ");
-        while(oqueFazerCadastroAlunos !== "1" && oqueFazerCadastroAlunos !== "2" && oqueFazerCadastroAlunos !== "3"){
+        while(oqueFazerCadastroAlunos !== "1" && oqueFazerCadastroAlunos !== "2"){
 
             console.clear();
             console.log("[ERRO] Digite novamente!");
@@ -159,12 +158,14 @@ async function CadastroAlunos() {
             seriesAlunos.push (Number(serieAluno));
             generosAlunos.push (generoAluno);
         }
-    }while(oqueFazerCadastroAlunos !== "3"){
-        return ExecutarAdmin();
+    }while(oqueFazerCadastroAlunos !== "2"){
+        return;
     }
 }
 //----------------------------------------------------------------------
 async function pesquisarAlunos () {
+
+    let alunoEncontrado = false
 
     console.clear();
     console.log("==================")
@@ -180,8 +181,6 @@ async function pesquisarAlunos () {
         console.log("[ERRO] Digite novamente!");
         qualAlunopesquisar = await rl.question("Qual aluno Você quer pesquisar? ");
     }
-
-        let alunoEncontrado = false
 
     for (let i = 0; i < nomesAlunos.length; i++){
         
@@ -215,80 +214,376 @@ async function pesquisarAlunos () {
         return;
 }
 //----------------------------------------------------------------------
-async function deletarAluno() {
+async function pesquisarAlunosAdmin() {
     
+    let oquefazerPesquisarAlunos
+    let alunoEncontrado = false
+
     console.clear();
-    console.log("================");
-    console.log(" DELETAR ALUNOS");
-    console.log("================");
-    let escolhadeletar = await rl.question("Deseja deletar um Aluno?");
-    while(escolhadeletar !== "Sim" && escolhadeletar !== "sim" && escolhadeletar !== "Não" && escolhadeletar !== "Nao" && escolhadeletar !== "não" && escolhadeletar !== "nao"){
-        
+    console.log("==========================");
+    console.log("     PESQUISAR ALUNOS");
+    console.log("==========================");
+    console.log(" 1-Pesquisar");
+    console.log(" 2-Editar dados do Aluno");
+    console.log(" 3-Voltar");
+    console.log("==========================");
+    oquefazerPesquisarAlunos = await rl.question("Oque deseja fazer? R: ");
+    while(oquefazerPesquisarAlunos !== "1" && oquefazerPesquisarAlunos !== "2" && oquefazerPesquisarAlunos !== "3"){
+
         console.clear();
         console.log("[ERRO] Digite novamente!");
-        escolhadeletar = await rl.question("Deseja deletar um Aluno?");
+        oquefazerPesquisarAlunos = await rl.question("Oque deseja fazer? R: ");
     }
-    if(escolhadeletar.toLocaleLowerCase() === "sim"){
-
-        console.clear();
-        let qualAlunopesquisar = await rl.question("Qual Aluno Você quer pesquisar? R: ")
-        while(qualAlunopesquisar === ""){
-
-            console.clear();
-            console.log("[ERRO] Digite novamente!");
-            qualAlunopesquisar = await rl.question("Qual Aluno Você quer pesquisar? R: ")
-        }
+    if(oquefazerPesquisarAlunos === "2"){
 
         const nomesAlunosCerto = nomesAlunos.map(nome => nome[0].toUpperCase() + nome.slice(1));
 
-        console.clear();
+        let qualAlunopesquisar = await rl.question("Qual aluno Você quer Editar? ");
+        while (qualAlunopesquisar === "" ){
 
-        for (let indice = 0; indice < nomesAlunos.length;indice++){
-
-        if (qualAlunopesquisar.toLocaleLowerCase() === nomesAlunos[indice].toLocaleLowerCase()){
-
-            console.clear();
-            console.log("Aluno encontrado!")
-            console.log("------------------------");
-            console.log(`${indice+1}.`);
-            console.log(`Nome: ${nomesAlunosCerto[indice]}`);
-            console.log(`Idade: ${idadesAlunos[indice]} anos`);
-            console.log(`Série: ${seriesAlunos[indice]} ano`);
-            if(seriesAlunos[i] === "1"){
-            console.log(`Turma: ${turmasAlunos1[i]}`);
-            }
-            else if(seriesAlunos[i] === "2"){
-            console.log(`Turma: ${turmasAlunos2[i]}`);
-            }
-            else if(seriesAlunos[i] === "3"){
-            console.log(`Turma: ${turmasAlunos3[i]}`);
-            }
-            console.log(`Genero: ${generosAlunos[indice]}`);
-        }
-        console.clear();
-        let temCertezaExcluir = await rl.question("Tem certeza que deseja excluir esse aluno (a)? R: ")
-        while(temCertezaExcluir !== "Sim" && temCertezaExcluir !== "sim" && temCertezaExcluir !== "Não" && temCertezaExcluir !== "Nao" && temCertezaExcluir !== "não" && temCertezaExcluir !== "nao"){
-            
             console.clear();
             console.log("[ERRO] Digite novamente!");
-            temCertezaExcluir = await rl.question("Tem certeza que deseja excluir esse aluno (a)? R: ")
+            qualAlunopesquisar = await rl.question("Qual aluno Você quer Editar? ");
         }
-        if(temCertezaExcluir.toLocaleLowerCase() === "sim"){
+        console.clear();
+        let i = -1
+        for (i = 0; i < nomesAlunos.length; i++){
+                
+            if (qualAlunopesquisar.toLocaleLowerCase() === nomesAlunos[i].toLocaleLowerCase()){
+                console.log("Aluno encontrado!")
+                console.log("------------------------");
+                console.log(`${i+1}.`);
+                console.log(`Nome: ${nomesAlunosCerto[i]}`);
+                console.log(`Idade: ${idadesAlunos[i]} anos`);
+                console.log(`Série: ${seriesAlunos[i]} ano`);
+                if(seriesAlunos[i] === "1"){
+                console.log(`Turma: ${turmasAlunos1[i]}`);
+                }
+                else if(seriesAlunos[i] === "2"){
+                console.log(`Turma: ${turmasAlunos2[i]}`);
+                }
+                else if(seriesAlunos[i] === "3"){
+                console.log(`Turma: ${turmasAlunos3[i]}`);
+                }
+                console.log(`Genero: ${generosAlunos[i]}`);
+                alunoEncontrado = true;
 
-            nomesAlunos.splice(indice, 1);
-            idadesAlunos.splice(indice, 1);
-            seriesAlunos.splice(indice, 1);
-            generosAlunos.splice(indice, 1);
+                 break;
+
+            }
+        }
+
+        if(alunoEncontrado === true){
+            console.log("=====================");
+            console.log(" EDITAR DADOS ALUNOS");
+            console.log("=====================");
+            console.log(" 1-Editar Nome");
+            console.log(" 2-Editar Idade");
+            console.log(" 3-Editar Serie");
+            console.log(" 4-Voltar");
+            console.log("=====================");
+            let editarDadosAlunos = await rl.question("Oque deseja fazer? R: ");
+            while(editarDadosAlunos !== "1" && editarDadosAlunos !== "2" && editarDadosAlunos !== "3" && editarDadosAlunos !== "4"){
+
+                console.log("[ERRO] Digite novamente!");
+                editarDadosAlunos = await rl.question("Oque deseja fazer? R: ");
+            }
+            if(editarDadosAlunos === "1"){
+                let editarNome = await rl.question(`Qual é o novo nome do (a) ${qualAlunopesquisar}? R: `);
+                while(editarNome === ""){
+
+                    console.clear();
+                    console.log("[ERRO] Digite novamente!");
+                    editarNome = await rl.question(`Qual é o novo nome do (a) ${qualAlunopesquisar}? R: `);
+                }
+                nomesAlunos[i] = editarNome;
+            }
+            else if(editarDadosAlunos === "2"){
+                let editarIdade = await rl.question(`Qual é a nova idade do (a) ${qualAlunopesquisar}? R: `);
+                while(editarIdade === ""){
+
+                    console.clear();
+                    console.log("[ERRO] Digite novamente!");
+                    editarIdade = await rl.question(`Qual é a nova idade do (a) ${qualAlunopesquisar}? R: `);
+                }
+                idadesAlunos[i] = editarIdade;
+            }
+            else if(editarDadosAlunos === "3"){
+                let editarSerie = await rl.question(`Qual é a nova série do (a) ${qualAlunopesquisar}? R: `);
+                while(editarSerie === ""){
+
+                    console.clear();
+                    console.log("[ERRO] Digite novamente!");
+                    editarSerie = await rl.question(`Qual é a nova série do (a) ${qualAlunopesquisar}? R: `);
+                }
+                seriesAlunos[i] = editarSerie;
+            }
+            else if(editarDadosAlunos === "4"){
+                console.log("Voltando...")
+                await Parar();
+            }
+        }
+
+        
+        alunoEncontrado = true;
+    }
+    
+       else if(oquefazerPesquisarAlunos === "1"){
+
+        const nomesAlunosCerto = nomesAlunos.map(nome => nome[0].toUpperCase() + nome.slice(1));
+
+        let qualAlunopesquisar = await rl.question("Qual aluno Você quer pesquisar? ");
+        while (qualAlunopesquisar === "" ){
 
             console.clear();
-            console.log(`${nomesAlunosCerto[indice]} excluido com Sucesso!`)
+            console.log("[ERRO] Digite novamente!");
+            qualAlunopesquisar = await rl.question("Qual aluno Você quer pesquisar? ");
+        }
+        for (let i = 0; i < nomesAlunos.length; i++){
+                
+            if (qualAlunopesquisar.toLocaleLowerCase() === nomesAlunos[i].toLocaleLowerCase()){
+                console.log("Aluno encontrado!")
+                console.log("------------------------");
+                console.log(`${i+1}.`);
+                console.log(`Nome: ${nomesAlunosCerto[i]}`);
+                console.log(`Idade: ${idadesAlunos[i]} anos`);
+                console.log(`Série: ${seriesAlunos[i]} ano`);
+                if(seriesAlunos[i] === "1"){
+                console.log(`Turma: ${turmasAlunos1[i]}`);
+                }
+                else if(seriesAlunos[i] === "2"){
+                console.log(`Turma: ${turmasAlunos2[i]}`);
+                }
+                else if(seriesAlunos[i] === "3"){
+                console.log(`Turma: ${turmasAlunos3[i]}`);
+                }
+                console.log(`Genero: ${generosAlunos[i]}`);
+                alunoEncontrado = true;
+
+                 break;
+
+            }
+        }
+    }
+    else{
+        console.log("Voltando...")
+        await Parar();
+    }
+    if(!alunoEncontrado){
+            console.log("Aluno não encontrado!")
+        }
+        await Parar();
+        return;
+}
+//----------------------------------------------------------------------
+async function deletarAlunoEProfessores() {
+
+    let oquefazerdeletar
+    let indice
+    let alunoEncontrado = false
+    let professorEncontrado = false
+
+    console.clear();
+    console.log("==============================");
+    console.log(" DELETAR ALUNOS E PROFESSORES");
+    console.log("==============================");
+    console.log(" 1-Deletar Aluno");
+    console.log(" 2-Deletar Professor");
+    console.log(" 3-Voltar");
+    console.log("==============================");
+
+    oquefazerdeletar = await rl.question("Oque deseja fazer? R: ");
+
+    while(oquefazerdeletar !== "1" && oquefazerdeletar !== "2" && oquefazerdeletar !== "3"){
+
+        console.clear();
+        console.log("[ERRO] Digite novamente!");
+        oquefazerdeletar = await rl.question("Oque deseja fazer? R: ");
+    }
+
+    if(oquefazerdeletar === "1"){
+
+        let escolhadeletar = await rl.question("Deseja deletar um Aluno? (Sim/Não): ");
+
+        while(escolhadeletar.toLowerCase() !== "sim" && escolhadeletar.toLowerCase() !== "não" && escolhadeletar.toLowerCase() !== "nao"){
+
+            console.clear();
+            console.log("[ERRO] Digite novamente!");
+            escolhadeletar = await rl.question("Deseja deletar um Aluno? (Sim/Não): ");
+        }
+
+        if(escolhadeletar.toLowerCase() === "sim"){
+
+            console.clear();
+
+            let qualAlunopesquisar = await rl.question("Qual Aluno Você quer pesquisar? R: ");
+
+            while(qualAlunopesquisar.trim() === ""){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                qualAlunopesquisar = await rl.question("Qual Aluno Você quer pesquisar? R: ");
+            }
+
+            const nomesAlunosCerto = nomesAlunos.map(nome => nome[0].toUpperCase() + nome.slice(1));
+
+            console.clear();
+
+            for(indice = 0; indice < nomesAlunos.length; indice++){
+
+                if(qualAlunopesquisar.toLowerCase().trim() === nomesAlunos[indice].toLowerCase().trim()){
+
+                    alunoEncontrado = true;
+
+                    console.clear();
+                    console.log("Aluno encontrado!");
+                    console.log("------------------------");
+                    console.log(`${indice+1}.`);
+                    console.log(`Nome: ${nomesAlunosCerto[indice]}`);
+                    console.log(`Idade: ${idadesAlunos[indice]} anos`);
+                    console.log(`Série: ${seriesAlunos[indice]} ano`);
+
+                    if(seriesAlunos[indice] === "1"){
+                        console.log(`Turma: ${turmasAlunos1[indice]}`);
+                    }
+                    else if(seriesAlunos[indice] === "2"){
+                        console.log(`Turma: ${turmasAlunos2[indice]}`);
+                    }
+                    else if(seriesAlunos[indice] === "3"){
+                        console.log(`Turma: ${turmasAlunos3[indice]}`);
+                    }
+
+                    console.log(`Gênero: ${generosAlunos[indice]}`);
+                    break;
+                }
+            }
+
+            if(alunoEncontrado === false){
+
+                console.clear();
+                console.log("Aluno não encontrado!");
+                await Parar();
+                return;
+            }
+
+            let temCertezaExcluir = await rl.question("Tem certeza que deseja excluir esse aluno (a)? R: ");
+
+            while(temCertezaExcluir.toLowerCase() !== "sim" && temCertezaExcluir.toLowerCase() !== "não" && temCertezaExcluir.toLowerCase() !== "nao"){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                temCertezaExcluir = await rl.question("Tem certeza que deseja excluir esse aluno (a)? R: ");
+            }
+
+            if(temCertezaExcluir.toLowerCase() === "sim"){
+
+                nomesAlunos.splice(indice, 1);
+                idadesAlunos.splice(indice, 1);
+                seriesAlunos.splice(indice, 1);
+                generosAlunos.splice(indice, 1);
+                turmasAlunos1.splice(indice, 1);
+                turmasAlunos2.splice(indice, 1);
+                turmasAlunos3.splice(indice, 1);
+
+                console.clear();
+                console.log(`${nomesAlunosCerto[indice]} excluído com sucesso!`);
+            }
+            else{
+                console.clear();
+                console.log("Exclusão cancelada!");
+            }
         }
         else{
-            return;
+            console.clear();
+            console.log("Operação cancelada!");
         }
     }
-    await Parar();
+
+    else if(oquefazerdeletar === "2"){
+
+        let escolhadeletarProfessor = await rl.question("Deseja deletar um Professor? (Sim/Não): ");
+
+        while(escolhadeletarProfessor.toLowerCase() !== "sim" && escolhadeletarProfessor.toLowerCase() !== "não" && escolhadeletarProfessor.toLowerCase() !== "nao"){
+
+            console.clear();
+            console.log("[ERRO] Digite novamente!");
+            escolhadeletarProfessor = await rl.question("Deseja deletar um Professor? (Sim/Não): ");
+        }
+
+        if(escolhadeletarProfessor.toLowerCase() === "sim"){
+
+            console.clear();
+
+            let qualProfessorPesquisar = await rl.question("Qual Professor Você quer pesquisar? R: ");
+
+            while(qualProfessorPesquisar.trim() === ""){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                qualProfessorPesquisar = await rl.question("Qual Professor Você quer pesquisar? R: ");
+            }
+
+            const nomesProfessoresCerto = nomesProfessores.map(nome => nome[0].toUpperCase() + nome.slice(1));
+
+            console.clear();
+
+            for(indice = 0; indice < nomesProfessores.length; indice++){
+
+                if(qualProfessorPesquisar.toLowerCase().trim() === nomesProfessores[indice].toLowerCase().trim()){
+
+                    professorEncontrado = true;
+
+                    console.clear();
+                    console.log("Professor encontrado!");
+                    console.log("------------------------");
+                    console.log(`${indice+1}.`);
+                    console.log(`Nome: ${nomesProfessoresCerto[indice]}`);
+                    break;
+                }
+            }
+
+            if(professorEncontrado === false){
+
+                console.clear();
+                console.log("Professor não encontrado!");
+                await Parar();
+                return;
+            }
+
+            let temCertezaExcluirProfessor = await rl.question("Tem certeza que deseja excluir esse Professor? R: ");
+
+            while(temCertezaExcluirProfessor.toLowerCase() !== "sim" && temCertezaExcluirProfessor.toLowerCase() !== "não" && temCertezaExcluirProfessor.toLowerCase() !== "nao"){
+
+                console.clear();
+                console.log("[ERRO] Digite novamente!");
+                temCertezaExcluirProfessor = await rl.question("Tem certeza que deseja excluir esse Professor? R: ");
+            }
+
+            if(temCertezaExcluirProfessor.toLowerCase() === "sim"){
+
+                nomesProfessores.splice(indice, 1);
+
+                console.clear();
+                console.log(`${nomesProfessoresCerto[indice]} excluído com sucesso!`);
+            }
+            else{
+                console.clear();
+                console.log("Exclusão cancelada!");
+            }
+        }
+        else{
+            console.clear();
+            console.log("Operação cancelada!");
+        }
     }
+
+    else if(oquefazerdeletar === "3"){
+        console.log("Voltando...");
+        await Parar();
+        return;
+    }
+
+    await Parar();
     return;
 }
 //----------------------------------------------------------------------
@@ -1462,9 +1757,16 @@ async function ExecutarAdmin () {
         await professoresAdmin();
         console.clear();
     }
-    else if (escolha === ""){
-        await criarContas();
+    else if (escolha === "7"){
+        await pesquisarAlunosAdmin();
         console.clear();
+    }
+    else if (escolha === "8"){
+        await deletarAlunoEProfessores();
+        console.clear();
+    }
+    else{
+
     }
     }while (escolha !== "10");
     console.clear();
