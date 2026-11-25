@@ -5,6 +5,9 @@ const rl = Readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
+function limparTela() {
+    process.stdout.write('\x1Bc');
+}
 
 //----------------------------------------------------------------------
 
@@ -523,13 +526,13 @@ async function deletarAlunoEProfessores() {
                 qualProfessorPesquisar = await rl.question("Qual Professor Você quer pesquisar? R: ");
             }
 
-            const nomesProfessoresCerto = nomesProfessores.map(nome => nome[0].toUpperCase() + nome.slice(1));
+            const nomesProfessoresCerto = professoresNomes.map(nome => nome[0].toUpperCase() + nome.slice(1));
 
             console.clear();
 
-            for(indice = 0; indice < nomesProfessores.length; indice++){
+            for(indice = 0; indice < professoresNomes.length; indice++){
 
-                if(qualProfessorPesquisar.toLowerCase().trim() === nomesProfessores[indice].toLowerCase().trim()){
+                if(qualProfessorPesquisar.toLowerCase().trim() === professoresNomes[indice].toLowerCase().trim()){
 
                     professorEncontrado = true;
 
@@ -561,7 +564,7 @@ async function deletarAlunoEProfessores() {
 
             if(temCertezaExcluirProfessor.toLowerCase() === "sim"){
 
-                nomesProfessores.splice(indice, 1);
+                professoresNomes.splice(indice, 1);
 
                 console.clear();
                 console.log(`${nomesProfessoresCerto[indice]} excluído com sucesso!`);
@@ -1150,7 +1153,6 @@ async function login () {
         else if (loginOqueFazer === "1"){
 
             console.clear();
-
             console.log("==================")
             console.log(" LOGIN DE USUÁRIO")
             console.log("==================")
@@ -1179,7 +1181,7 @@ async function login () {
                 }
             }
 
-            if (usuarioEncontrado) {
+            if (usuarioEncontrado === true) {
 
                 console.clear();
                 console.log("Login realizado com sucesso!");
@@ -1221,6 +1223,7 @@ async function login () {
                 console.clear();
                 console.log("Usuário ou senha incorretos!");
                 await Parar();
+                console.clear();
             }
         }
     }while(loginOqueFazer !== "3");
@@ -1428,7 +1431,7 @@ async function professoresAdmin () {
         console.log(" 2-Voltar");
         console.log("=========================");
         let oqueFazerProfessores2 = await rl.question("Oque deseja fazer? R: ")
-        while(oqueFazerProfessores2 !== "1" && oqueFazerProfessores2 !== "2" && oqueFazerProfessores2 !== "3"){
+        while(oqueFazerProfessores2 !== "1" && oqueFazerProfessores2 !== "2"){
 
             console.clear();
             console.log("[ERRO] Digite novamente!");
@@ -1436,7 +1439,7 @@ async function professoresAdmin () {
         }
         if(oqueFazerProfessores2 === "1"){
 
-            console.clear();
+            limparTela();
             console.log("=========================");
             console.log(" CADASTRO DE PROFESSORES");
             console.log("=========================");
@@ -1450,7 +1453,7 @@ async function professoresAdmin () {
             let materiaProfessor = await rl.question(`Qual é a matéria do (a) ${nomeProfessor}? R: `);
             while(!materiasValidas.includes(materiaProfessor)){
 
-                console.clear();
+                limparTela();
                 console.log("[ERRO] Digite novamente!(Verifique os acentos e letra Maiuscula no inicio)");
                 materiaProfessor = await rl.question(`Qual é a matéria do (a) ${nomeProfessor}? R: `);
             }
@@ -1582,7 +1585,7 @@ async function RedefinirSenhasAdmin() {
         console.log(" 1-Redefinir senha");
         console.log(" 2-Voltar");
         oqueFazerRedefinirSenhas = await rl.question("Oque deseja fazer? R: ");
-        while(oqueFazerRedefinirSenhas){
+        while(oqueFazerRedefinirSenhas !== "1" && oqueFazerRedefinirSenhas !== "2"){
 
             console.clear();
             console.log("[ERRO] Digite novamente!");
@@ -1616,18 +1619,18 @@ async function RedefinirSenhasAdmin() {
                     console.log(`Senha do ${loginUsuário[indice]} alterado com sucesso!`)
                     usuarioEncontrado = true
                     await Parar();
-                    return ExecutarAdmin();
+                    return;
                 }
             }
             if(usuarioEncontrado === false){
 
                 console.log("\n[ERRO] Usuário não encontrado no sistema!");
                 await Parar();
-                return ExecutarAdmin();
+                return;
             }
         }
     }while(oqueFazerRedefinirSenhas !== "2"){
-        return ExecutarAdmin;
+        return;
     }
 }
 //----------------------------------------------------------------------
@@ -1706,7 +1709,7 @@ async function ExecutarAdmin () {
 
     let escolha = "";
 
-    console.clear();
+    limparTela();
 
     do{
     console.log("=============================================");
@@ -1725,7 +1728,7 @@ async function ExecutarAdmin () {
     console.log(" 🔍 CONTROLE DE DADOS (ALUNOS):");
     console.log("   7 - Buscar / Editar Dados de Aluno");
     console.log("   8 - Excluir Registro (Aluno/Professor)");
-    console.log("   9 - Backup / Ver Estatísticas Gerais");
+    console.log("   9 - Ver Estatísticas Gerais");
     console.log("");
     console.log(" 🚪 SISTEMA:");
     console.log("   10 - Voltar ao Menu Principal");
@@ -1763,6 +1766,10 @@ async function ExecutarAdmin () {
     }
     else if (escolha === "8"){
         await deletarAlunoEProfessores();
+        console.clear();
+    }
+    else if (escolha === "9"){
+        await estatísticaTurma();
         console.clear();
     }
     else{
