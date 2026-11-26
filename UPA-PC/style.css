@@ -1,0 +1,221 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    background-color: aliceblue;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 220px;
+    width: calc(100% - 220px);
+    height: 180px;
+    padding: 20px;
+    margin: 0;
+    color: black;
+}
+#header-CPF{
+    position: fixed;
+    left: 270px;
+    padding: 10px;
+    color: #087EA4;
+    top: 145px;
+}
+header h4{
+    position: fixed;
+    top: 140px;
+    left: 230px;
+    color: black;
+}
+header h1{
+    position: fixed;
+    left: 245px;
+    color: #12304A;
+}
+#nome-usuario{
+    position: fixed;
+    top: 80px;
+    left: 300px;
+    color: black;
+}
+aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    background: linear-gradient(to bottom, #071936, #0056D2, #000000);
+}
+#button-barra-1{
+    position: fixed;
+    top: 100px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 180px;
+    cursor: pointer;
+
+}
+#button-barra-2{
+    position: fixed;
+    top: 150px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 180px;
+    cursor: pointer;
+
+}
+#button-barra-3{
+    position: fixed;
+    top: 200px;
+    background-color:black;
+    color: white;
+    padding: 10px;
+    width: 180px;
+    cursor: pointer;
+
+}
+#button-barra-4{
+    position: fixed;
+    top: 250px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 180px;
+    cursor: pointer;
+
+}
+#button-barra-1:hover,
+#button-barra-2:hover,
+#button-barra-3:hover,
+#button-barra-4:hover {
+    background-color: white;
+    color: black;
+}
+#main-button-1:hover,
+#main-button-2:hover,
+#main-button-3:hover,
+#main-button-4:hover,
+#main-button-5:hover,
+#main-button-6:hover,
+#main-button-7:hover,
+#main-button-8:hover {
+    background-color: black;
+    color: white;
+}
+#barra-h2{
+    position: fixed;
+    left: 105px;
+    color: white;
+}
+#logo{
+    position: fixed;
+    left: 10px;
+}
+#main-button-1{
+    position: fixed;
+    top: 280px;
+    background-color: #FFFFFF;
+    color: #12304A;
+    padding: 50px;
+    left: 350px;
+    width: 150px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+#main-button-2{
+    position: fixed;
+    top: 280px;
+    background-color: #FFFFFF;
+    color: #12304A;
+    padding: 50px;
+    left: 550px;
+    width: 150px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+#main-button-3{
+    position: fixed;
+    top: 280px;
+    background-color: #FFFFFF;
+    color: #12304A;
+    padding: 58px;
+    left: 750px;
+    width: 150px;
+    border-radius: 30px;
+    text-indent: -15px;
+    cursor: pointer;
+}
+#main-button-4{
+    position: fixed;
+    top: 280px;
+    background-color: #FFFFFF;
+    color: #12304A;
+    padding: 50px;
+    left: 950px;
+    width: 150px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+#main-button-5{
+    position: fixed;
+    top: 480px;
+    background-color: #FFFFFF;
+    color: #12304A;
+    padding: 57px;
+    left: 350px;
+    width: 150px;
+    border-radius: 30px;
+    text-indent: -24px;
+    cursor: pointer;
+}
+#main-button-6{
+    position: fixed;
+    top: 480px;
+    background-color: #FFFFFF;
+    color: #12304A;
+    padding: 50px;
+    left: 550px;
+    width: 150px;
+    border-radius: 30px;
+    text-indent: -10px;
+    cursor: pointer;
+}
+#main-button-7{
+    position: fixed;
+    top: 480px;
+    background-color: #FFFFFF;
+    color: #12304A;
+    padding: 50px;
+    left: 750px;
+    width: 150px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+#main-button-8{
+    position: fixed;
+    top: 480px;
+    background-color: #FFFFFF;
+    color: #12304A;
+    padding: 50px;
+    left: 950px;
+    width: 150px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+#span{
+    position: relative;
+    left: 2px;
+}
+#span-2{
+    position: relative;
+    left: -18px;
+}
