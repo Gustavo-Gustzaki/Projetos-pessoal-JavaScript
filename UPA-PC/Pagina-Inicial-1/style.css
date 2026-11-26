@@ -8,42 +8,45 @@ html, body {
     width: 100%;
     min-height: 100%;
     overflow-x: hidden;
-    background-color: aliceblue;
+    background-color: transparent;
 }
 
 header {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 220px;
     width: calc(100% - 220px);
-    height: 180px;
     padding: 20px;
     margin: 0;
     color: black;
 }
 #header-CPF{
-    position: fixed;
-    left: 270px;
+    position: relative;
+    left: 60px;
     padding: 10px;
     color: #087EA4;
-    top: 145px;
+    top: -50px;
 }
 header h4{
-    position: fixed;
-    top: 140px;
-    left: 230px;
+    position: relative;
+    left: 10px;
     color: black;
 }
 header h1{
-    position: fixed;
-    left: 245px;
+    position: relative;
+    left: 10px;
     color: #12304A;
 }
 #nome-usuario{
-    position: fixed;
-    top: 80px;
-    left: 300px;
+    position: relative;
+    left: 80px;
     color: black;
+}
+header img {
+    position: relative;
+    width: 30px;
+    left: -180px;
+    top: -85px;
 }
 aside {
     position: fixed;
@@ -126,7 +129,7 @@ aside {
     background-color: #FFFFFF;
     color: #12304A;
     padding: 50px;
-    left: 350px;
+    left: 400px;
     width: 150px;
     border-radius: 30px;
     cursor: pointer;
@@ -137,7 +140,7 @@ aside {
     background-color: #FFFFFF;
     color: #12304A;
     padding: 50px;
-    left: 550px;
+    left: 650px;
     width: 150px;
     border-radius: 30px;
     cursor: pointer;
@@ -148,7 +151,7 @@ aside {
     background-color: #FFFFFF;
     color: #12304A;
     padding: 58px;
-    left: 750px;
+    left: 900px;
     width: 150px;
     border-radius: 30px;
     text-indent: -15px;
@@ -160,7 +163,7 @@ aside {
     background-color: #FFFFFF;
     color: #12304A;
     padding: 50px;
-    left: 950px;
+    left: 1150px;
     width: 150px;
     border-radius: 30px;
     cursor: pointer;
@@ -171,7 +174,7 @@ aside {
     background-color: #FFFFFF;
     color: #12304A;
     padding: 57px;
-    left: 350px;
+    left: 400px;
     width: 150px;
     border-radius: 30px;
     text-indent: -24px;
@@ -183,7 +186,7 @@ aside {
     background-color: #FFFFFF;
     color: #12304A;
     padding: 50px;
-    left: 550px;
+    left: 650px;
     width: 150px;
     border-radius: 30px;
     text-indent: -10px;
@@ -195,7 +198,7 @@ aside {
     background-color: #FFFFFF;
     color: #12304A;
     padding: 50px;
-    left: 750px;
+    left: 900px;
     width: 150px;
     border-radius: 30px;
     cursor: pointer;
@@ -206,7 +209,7 @@ aside {
     background-color: #FFFFFF;
     color: #12304A;
     padding: 50px;
-    left: 950px;
+    left: 1150px;
     width: 150px;
     border-radius: 30px;
     cursor: pointer;
