@@ -2,7 +2,7 @@ aside {
     position: fixed;
     top: 0;
     left: 0;
-    width: 220px;
+    width: 230px;
     height: 100vh;
     background: linear-gradient(to bottom, #071936, #0056D2, #000000);
 }
@@ -60,7 +60,7 @@ aside {
 }
 #logo{
     position: fixed;
-    left: 10px;
+    left: 8px;
     color: white;
 }
 #Agendar-ocorrido{
@@ -68,13 +68,147 @@ aside {
     border-color: black;
 }
 main{
-    position: relative;
-    left: 250px;
+
 }
-/*#Agendar-ocorrido textarea{
+body {
+    margin: 0;
+    background-color: #bdbdbd;
+    font-family: Arial, sans-serif;
+}
+
+#principal {
     position: relative;
-    top: 85px;
-    left: -120px;
-    width: 500px;
+    margin-left: 250px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 12px;
+}
+
+/* CABEÇALHO */
+
+#cabecalho {
+    grid-column: 1 / 3;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#titulo-agendar {
+    width: 100%;
+    font-size: 38px;
+    margin: 0 0 8px 0;
+}
+
+#laber-consultas,
+#label-data {
+    background-color: #eeeeee;
+    font-weight: bold;
+    padding: 5px;
+}
+
+#tipo-consulta,
+#data-consulta {
+    background-color: #eeeeee;
+    border: none;
+    padding: 6px;
+    font-size: 16px;
+}
+
+/* RELATO E INFORMAÇÕES GERAIS */
+
+#section-relato,
+#section-gerais {
+    display: flex;
+    flex-direction: column;
+}
+
+#label-relato,
+#label-gerais,
+#label-cpf,
+#label-cep,
+#label-rg,
+#label-telefone {
+    background-color: #111;
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+}
+
+#Relato,
+#agendar-informacoes {
+    background-color: #111;
+    border: none;
     resize: none;
+    height: 125px;
+    color: white;
+}
+
+/* INFORMAÇÕES PESSOAIS */
+
+#titulo-pessoais {
+    grid-column: 1 / 3;
+    font-size: 38px;
+    margin: -12px 0 0;
+}
+
+#section-cpf,
+#section-cep,
+#section-rg,
+#section-telefone {
+    display: flex;
+    flex-direction: column;
+    background-color: #eeeeee;
+}
+
+#CPF,
+#CEP,
+#telefone {
+    height: 42px;
+    border: none;
+    background-color: #eeeeee;
+    font-size: 16px;
+}
+
+#RG {
+    height: 42px;
+    padding: 5px;
+    background-color: #eeeeee;
+}
+
+/* BOTÕES DAS UPAS */
+
+#button-upa-sul,
+#button-upa-leste {
+    background-color: #111;
+    color: white;
+    border: none;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#button-upa-sul:hover,
+#button-upa-leste:hover {
+    background-color: #333;
+}
+
+/* BOTÃO IA */
+
+#button-ia {
+    grid-column: 1 / 2;
+    width: 180px;
+    padding: 12px;
+    background-color: #111;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#button-ia:hover {
+    background-color: #333;
 }

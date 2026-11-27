@@ -37,19 +37,15 @@
 
         </header>
 
-        <form id="form-agendamento">
+        <section id="section-relato">
 
-            <section id="section-relato">
+            <label id="label-relato" for="Relato">
+                Relate o ocorrido:
+            </label>
 
-                <label id="label-relato" for="Relato">
-                    Relate o ocorrido:
-                </label>
+            <textarea id="Relato" rows="5"></textarea>
 
-                <textarea id="Relato" rows="5"></textarea>
-
-            </section>
-
-        </form>
+        </section>
 
         <section id="section-gerais">
 
@@ -69,7 +65,7 @@
 
             <label id="label-cpf" for="CPF">CPF:</label>
 
-            <textarea id="CPF" rows="3"></textarea>
+            <input type="text" id="CPF">
 
         </section>
 
@@ -77,7 +73,7 @@
 
             <label id="label-cep" for="CEP">CEP:</label>
 
-            <textarea id="CEP" rows="3"></textarea>
+            <input type="text" id="CEP">
 
         </section>
 
@@ -93,12 +89,20 @@
 
             <label id="label-telefone" for="telefone">Telefone:</label>
 
-            <textarea id="telefone" rows="3"></textarea>
+            <input type="tel" id="telefone">
 
         </section>
 
-        <button id="button-upa">
-            UPA mais próxima
+        <button id="button-upa-sul">
+            UPA Sul
+            <br>
+            R. João da Costa Júnior
+        </button>
+
+        <button id="button-upa-leste">
+            UPA Leste
+            <br>
+            R. José Francisco Vieira
         </button>
 
         <button id="button-ia">
