@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUS Inteligente - Pronto-socorro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main>
+        <header id="cabecalho">
+            <div id="cabecalho-texto">
+                <span class="substitui">ATENDIMENTO COM IA</span>
+                <h1 id="titulo-pronto-socorro">Pronto-socorro</h1>
+                <p>Preencha as informações do paciente para iniciar a avaliação.</p>
+            </div>
+
+            <div id="status-atendimento">
+                <span class="status-ponto"></span>
+                Sistema de triagem ativo
+            </div>
+        </header>
+
+        <section id="campo-prioridade">
+
+            <div id="titulo-prioridades">
+                <label id="label-prioridades">Qual a prioridade?</label>
+
+                <div id="section-prioridade">
+
+                    <label class="opcao-prioridade">
+                        <input type="radio" name="prioridade" value="nao-urgente">
+                        <span>Não Urgente</span>
+                        <span class="cor-prioridade cor-azul"></span>
+                    </label>
+
+                    <label class="opcao-prioridade">
+                        <input type="radio" name="prioridade" value="pouco-urgente">
+                        <span>Pouco Urgente</span>
+                        <span class="cor-prioridade cor-verde"></span>
+                    </label>
+
+                    <label class="opcao-prioridade">
+                        <input type="radio" name="prioridade" value="urgente">
+                        <span>Urgente</span>
+                        <span class="cor-prioridade cor-amarela"></span>
+                    </label>
+
+                    <label class="opcao-prioridade">
+                        <input type="radio" name="prioridade" value="muito-urgente">
+                        <span>Muito Urgente</span>
+                        <span class="cor-prioridade cor-laranja"></span>
+                    </label>
+
+                    <label class="opcao-prioridade">
+                        <input type="radio" name="prioridade" value="emergencia">
+                        <span>Emergência</span>
+                        <span class="cor-prioridade cor-vermelha"></span>
+                    </label>
+
+                </div>
+            </div>
+
+            <div id="campo-paciente">
+                <label for="nome-paciente">Paciente:</label>
+                <input id="nome-paciente" type="text" placeholder="Nome completo do paciente">
+            </div>
+
+            <div id="campo-idade">
+                <label for="input-idade">Idade:</label>
+                <input id="input-idade" type="number" min="0" max="120" placeholder="Idade">
+            </div>
+
+        </section>
+
+        <section id="section-problema" class="painel-formulario">
+            <div id="problema">
+                <label for="problema-ocorrido">Descreva o ocorrido:</label>
+                <textarea id="problema-ocorrido" rows="4"
+                    placeholder="Descreva o que aconteceu, o que está sentindo e outras informações importantes..."></textarea>
+            </div>
+        </section>
+
+        <section id="section-localizacao" class="painel-formulario">
+            <div id="campo-localizacao">
+                <label for="digitar-localizacao">Localização do paciente:</label>
+                <textarea id="digitar-localizacao" rows="2"
+                    placeholder="Informe o endereço ou local exato onde o paciente está"></textarea>
+            </div>
+        </section>
+
+        
+    <section id="section-sinais-vitais">
+
+        <div class="titulo-secao">
+            <div>
+                <span class="substitui">MONITORAMENTO DO PACIENTE</span>
+                <h2>Sinais vitais atuais</h2>
+                <p>Acompanhamento dos indicadores de saúde</p>
+            </div>
+
+            <span class="indicador-atual">
+                <span class="status-ponto"></span>
+                Análise por IA
+            </span>
+        </div>
+
+        <div id="painel-sinais-vitais">
+
+            <div class="card-sinal">
+                <div class="sinal-topo">
+                    <span>Pressão arterial</span>
+                    <span class="icone-sinal">♥</span>
+                </div>
+                <div id="valor-pressao"></div>
+                <div id="status-pressao"></div>
+            </div>
+
+            <div class="card-sinal">
+                <div class="sinal-topo">
+                    <span>Frequência cardíaca</span>
+                    <span class="icone-sinal">♡</span>
+                </div>
+                <div id="valor-frequencia"></div>
+                <div id="status-frequencia"></div>
+            </div>
+
+            <div class="card-sinal">
+                <div class="sinal-topo">
+                    <span>Saturação de oxigênio</span>
+                    <span class="icone-sinal">◉</span>
+                </div>
+                <div id="valor-saturacao"></div>
+                <div id="status-saturacao"></div>
+            </div>
+
+            <div class="card-sinal">
+                <div class="sinal-topo">
+                    <span>Temperatura</span>
+                    <span class="icone-sinal">♨</span>
+                </div>
+                <div id="valor-temperatura"></div>
+                <div id="status-temperatura"></div>
+            </div>
+
+        </div>
+
+        <div id="score-risco">
+
+            <div>
+                <span class="substitui">ANÁLISE DA INTELIGÊNCIA ARTIFICIAL</span>
+                <h3>Score de risco do paciente</h3>
+                <p id="descricao-risco"></p>
+            </div>
+
+            <div id="resultado-risco"></div>
+
+        </div>
+
+    </section>
+
+
+        
+    
+    <section id="section-alertas">
+
+        <div class="titulo-secao">
+            <div>
+                <span class="substitui">ANÁLISE INTELIGENTE</span>
+                <h2>Alertas críticos da IA</h2>
+                <p>Informações identificadas pela inteligência artificial</p>
+            </div>
+
+            <span class="alerta-icone">⚠</span>
+        </div>
+
+        <div id="lista-alertas">
+        </div>
+
+        <div id="protocolo-ia">
+
+            <div class="protocolo-lampada">✦</div>
+
+            <div>
+                <span class="substitui">SUGESTÃO DA INTELIGÊNCIA ARTIFICIAL</span>
+                <h3>Protocolo sugerido</h3>
+
+                <div id="sugestao-protocolo"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+    </main>
+
+    <aside id="barra-lateral">
+
+        <h1 id="logo">Logo</h1>
+
+        <h2 id="barra-h2">
+            SUS IA <br> inteligente
+        </h2>
+
+        <button id="button-barra-1">Inicio</button>
+
+        <button id="button-barra-2">Saude</button>
+
+        <button id="button-barra-3">Perfil</button>
+
+        <button id="button-barra-4">Configurações</button>
+
+    </aside>
+
+</body>
+</html>

@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendar Consultas</title>
+    <title>Agendar Consultas | SUS IA</title>
     <link rel="stylesheet" href="style.css">
     <script src="javascript.js" defer></script>
 </head>
@@ -15,99 +16,270 @@
 
         <header id="cabecalho">
 
-            <h1 id="titulo-agendar">
-                <u>AGENDAR CONSULTAS</u>
-            </h1>
+            <div id="cabecalho-texto">
+                <span class="subtitulo">ATENDIMENTO DIGITAL</span>
+                <h1 id="titulo-agendar">Agendar consultas</h1>
+                <p>Preencha as informações abaixo para solicitar seu atendimento.</p>
+            </div>
 
-            <label id="laber-consultas" for="tipo-consulta">
-                Tipo de consulta
-            </label>
-
-            <select id="tipo-consulta">
-                <option id="opcao-rotina">Rotina de prevenção</option>
-                <option id="opcao-especializada">Consulta especializada</option>
-                <option id="opcao-urgencia">Consulta de Urgência</option>
-                <option id="opcao-domiciliar">Domiciliar</option>
-                <option id="opcao-teleconsulta">Teleconsulta</option>
-            </select>
-
-            <label id="label-data" for="data-consulta">Data:</label>
-
-            <input type="date" id="data-consulta">
+            <div id="etapas">
+                <span>01</span>
+                <span>02</span>
+                <span>03</span>
+                <span>04</span>
+            </div>
 
         </header>
 
+        <section id="section-consulta">
+
+            <div class="titulo-secao">
+                <span class="numero-secao">01</span>
+                <div>
+                    <h2>Dados da consulta</h2>
+                    <p>Escolha o tipo e a data desejada.</p>
+                </div>
+            </div>
+
+            <div id="campos-consulta">
+
+                <div class="campo">
+                    <label id="laber-consultas" for="tipo-consulta">
+                        Tipo de consulta
+                    </label>
+
+                    <select id="tipo-consulta">
+                        <option id="opcao-rotina">Rotina de prevenção</option>
+                        <option id="opcao-especializada">Consulta especializada</option>
+                        <option id="opcao-urgencia">Consulta de Urgência</option>
+                        <option id="opcao-domiciliar">Domiciliar</option>
+                        <option id="opcao-teleconsulta">Teleconsulta</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label id="label-data" for="data-consulta">
+                        Data desejada
+                    </label>
+
+                    <input type="date" id="data-consulta">
+                </div>
+
+            </div>
+
+        </section>
+
         <section id="section-relato">
+
+            <div class="titulo-secao">
+                <span class="numero-secao">02</span>
+                <div>
+                    <h2>Relato do paciente</h2>
+                    <p>Conte o que está acontecendo.</p>
+                </div>
+            </div>
 
             <label id="label-relato" for="Relato">
                 Relate o ocorrido:
             </label>
 
-            <textarea id="Relato" rows="5"></textarea>
+            <textarea
+                id="Relato"
+                rows="5"
+                placeholder="Descreva seus sintomas, quando começaram e outras informações importantes..."
+            ></textarea>
+
+            <p class="dica-campo">
+                Essas informações poderão auxiliar na organização do atendimento.
+            </p>
 
         </section>
 
         <section id="section-gerais">
 
+            <div class="titulo-secao">
+                <span class="numero-secao">03</span>
+                <div>
+                    <h2>Informações complementares</h2>
+                    <p>Adicione outros detalhes importantes.</p>
+                </div>
+            </div>
+
             <label id="label-gerais" for="agendar-informacoes">
                 Informações gerais:
             </label>
 
-            <textarea id="agendar-informacoes" rows="5"></textarea>
+            <textarea
+                id="agendar-informacoes"
+                rows="5"
+                placeholder="Alergias, medicamentos utilizados ou outras informações..."
+            ></textarea>
 
         </section>
 
-        <h1 id="titulo-pessoais">
-            Informações pessoais
-        </h1>
+        <h2 id="titulo-pessoais">04. Informações pessoais</h2>
 
         <section id="section-cpf">
 
-            <label id="label-cpf" for="CPF">CPF:</label>
+            <label id="label-cpf" for="CPF">CPF</label>
 
-            <input type="text" id="CPF">
+            <input
+                type="text"
+                id="CPF"
+                placeholder="000.000.000-00"
+                autocomplete="off"
+            >
 
         </section>
 
         <section id="section-cep">
 
-            <label id="label-cep" for="CEP">CEP:</label>
+            <label id="label-cep" for="CEP">CEP</label>
 
-            <input type="text" id="CEP">
+            <input
+                type="text"
+                id="CEP"
+                placeholder="00000-000"
+            >
 
         </section>
 
         <section id="section-rg">
 
-            <label id="label-rg" for="RG">Adicionar RG:</label>
+            <label id="label-rg" for="RG">Documento de identificação</label>
 
-            <input type="file" id="RG" name="RG_arquivo">
+            <input
+                type="file"
+                id="RG"
+                name="RG_arquivo"
+                accept="image/*,.pdf"
+            >
+
+            <small>Envie uma imagem ou PDF do documento.</small>
 
         </section>
 
         <section id="section-telefone">
 
-            <label id="label-telefone" for="telefone">Telefone:</label>
+            <label id="label-telefone" for="telefone">Telefone</label>
 
-            <input type="tel" id="telefone">
+            <input
+                type="tel"
+                id="telefone"
+                placeholder="(00) 00000-0000"
+            >
 
         </section>
 
-        <button id="button-upa-sul">
-            UPA Sul
-            <br>
-            R. João da Costa Júnior
-        </button>
+        
+    <section id="section-unidades">
 
-        <button id="button-upa-leste">
-            UPA Leste
-            <br>
-            R. José Francisco Vieira
-        </button>
+        <div class="titulo-secao">
+            <span class="numero-secao">05</span>
+            <div>
+                <h2>Encontre uma unidade de atendimento</h2>
+                <p>Descubra qual UPA está mais próxima de você.</p>
+            </div>
+        </div>
 
-        <button id="button-ia">
-            Preencher com IA
-        </button>
+        <div id="localizacao-container">
+
+            <div id="localizacao-icone">📍</div>
+
+            <div id="localizacao-texto">
+                <h3>Encontre a UPA mais próxima</h3>
+                <p>
+                    Utilize sua localização para identificar
+                    a unidade mais próxima de você.
+                </p>
+            </div>
+
+            <button id="button-localizacao" type="button">
+                Ver UPA mais próxima
+            </button>
+
+        </div>
+
+        <div id="permissao-localizacao" hidden>
+
+            <h3>📍 Podemos acessar sua localização?</h3>
+
+            <p>
+                Precisamos da sua localização para calcular
+                a distância até as unidades de atendimento.
+            </p>
+
+            <div id="botoes-permissao">
+                <button id="button-permitir" type="button">
+                    Sim, permitir localização
+                </button>
+
+                <button id="button-negar" type="button">
+                    Não permitir
+                </button>
+            </div>
+
+        </div>
+
+        <div id="resultado-localizacao" hidden>
+
+            <span id="resultado-tag">UNIDADE RECOMENDADA</span>
+
+            <h3 id="nome-upa-proxima"></h3>
+
+            <p id="endereco-upa-proxima"></p>
+
+            <p id="distancia-upa"></p>
+
+            <button id="button-abrir-rota" type="button">
+                Abrir rota no Google Maps →
+            </button>
+
+            <button id="button-escolher-upa" type="button">
+                Selecionar esta UPA
+            </button>
+
+        </div>
+
+        <p id="mensagem-localizacao" role="status"></p>
+
+    </section>
+
+
+        <section id="section-inteligencia">
+
+            <div id="ia-icone">✦</div>
+
+            <div id="ia-conteudo">
+                <h2>Assistente inteligente SUS IA</h2>
+                <p>
+                    Utilize a inteligência artificial para auxiliar
+                    no preenchimento e na organização das informações
+                    da sua solicitação.
+                </p>
+
+                <small>
+                    A IA não substitui avaliação ou diagnóstico médico.
+                </small>
+            </div>
+
+            <button id="button-ia" type="button">
+                ✦ Preencher com IA
+            </button>
+
+        </section>
+
+        <section id="section-confirmacao">
+
+            <p>
+                Confira os dados antes de enviar sua solicitação.
+            </p>
+
+            <button id="button-confirmar" type="button">
+                Confirmar agendamento →
+            </button>
+
+        </section>
 
     </main>
 
@@ -131,3 +303,4 @@
 
 </body>
 </html>
+
