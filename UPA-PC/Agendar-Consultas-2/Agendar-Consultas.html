@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Consultas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="javascript.js" defer></script>
+</head>
+
+<body>
+
+    <main id="principal">
+
+        <header id="cabecalho">
+
+            <h1 id="titulo-agendar">
+                <u>AGENDAR CONSULTAS</u>
+            </h1>
+
+            <label id="laber-consultas" for="tipo-consulta">
+                Tipo de consulta
+            </label>
+
+            <select id="tipo-consulta">
+                <option id="opcao-rotina">Rotina de prevenção</option>
+                <option id="opcao-especializada">Consulta especializada</option>
+                <option id="opcao-urgencia">Consulta de Urgência</option>
+                <option id="opcao-domiciliar">Domiciliar</option>
+                <option id="opcao-teleconsulta">Teleconsulta</option>
+            </select>
+
+            <label id="label-data" for="data-consulta">Data:</label>
+
+            <input type="date" id="data-consulta">
+
+        </header>
+
+        <form id="form-agendamento">
+
+            <section id="section-relato">
+
+                <label id="label-relato" for="Relato">
+                    Relate o ocorrido:
+                </label>
+
+                <textarea id="Relato" rows="5"></textarea>
+
+            </section>
+
+        </form>
+
+        <section id="section-gerais">
+
+            <label id="label-gerais" for="agendar-informacoes">
+                Informações gerais:
+            </label>
+
+            <textarea id="agendar-informacoes" rows="5"></textarea>
+
+        </section>
+
+        <h1 id="titulo-pessoais">
+            Informações pessoais
+        </h1>
+
+        <section id="section-cpf">
+
+            <label id="label-cpf" for="CPF">CPF:</label>
+
+            <textarea id="CPF" rows="3"></textarea>
+
+        </section>
+
+        <section id="section-cep">
+
+            <label id="label-cep" for="CEP">CEP:</label>
+
+            <textarea id="CEP" rows="3"></textarea>
+
+        </section>
+
+        <section id="section-rg">
+
+            <label id="label-rg" for="RG">Adicionar RG:</label>
+
+            <input type="file" id="RG" name="RG_arquivo">
+
+        </section>
+
+        <section id="section-telefone">
+
+            <label id="label-telefone" for="telefone">Telefone:</label>
+
+            <textarea id="telefone" rows="3"></textarea>
+
+        </section>
+
+        <button id="button-upa">
+            UPA mais próxima
+        </button>
+
+        <button id="button-ia">
+            Preencher com IA
+        </button>
+
+    </main>
+
+    <aside id="barra-lateral">
+
+        <h1 id="logo">Logo</h1>
+
+        <h2 id="barra-h2">
+            SUS IA <br> inteligente
+        </h2>
+
+        <button id="button-barra-1">Inicio</button>
+
+        <button id="button-barra-2">Saude</button>
+
+        <button id="button-barra-3">Perfil</button>
+
+        <button id="button-barra-4">Configurações</button>
+
+    </aside>
+
+</body>
+</html>

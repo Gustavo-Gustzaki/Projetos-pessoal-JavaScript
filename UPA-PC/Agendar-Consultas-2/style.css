@@ -1,0 +1,80 @@
+aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    background: linear-gradient(to bottom, #071936, #0056D2, #000000);
+}
+#button-barra-1{
+    position: fixed;
+    top: 100px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 180px;
+    cursor: pointer;
+
+}
+#button-barra-2{
+    position: fixed;
+    top: 150px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 180px;
+    cursor: pointer;
+
+}
+#button-barra-3{
+    position: fixed;
+    top: 200px;
+    background-color:black;
+    color: white;
+    padding: 10px;
+    width: 180px;
+    cursor: pointer;
+
+}
+#button-barra-4{
+    position: fixed;
+    top: 250px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 180px;
+    cursor: pointer;
+
+}
+#button-barra-1:hover,
+#button-barra-2:hover,
+#button-barra-3:hover,
+#button-barra-4:hover {
+    background-color: white;
+    color: black;
+}
+#barra-h2{
+    position: fixed;
+    left: 105px;
+    color: white;
+}
+#logo{
+    position: fixed;
+    left: 10px;
+    color: white;
+}
+#Agendar-ocorrido{
+    color: black;
+    border-color: black;
+}
+main{
+    position: relative;
+    left: 250px;
+}
+/*#Agendar-ocorrido textarea{
+    position: relative;
+    top: 85px;
+    left: -120px;
+    width: 500px;
+    resize: none;
+}
