@@ -1,5 +1,4 @@
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
     let formulario = document.getElementById("form-cadastro");
     let botaoGov = document.getElementById("entrar-gov");
@@ -9,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    formulario.addEventListener("submit", function(event) {
+    formulario.addEventListener("submit", function (event) {
 
         event.preventDefault();
 
@@ -29,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-        let usuarioExistente = usuarios.find(function(conta) {
+        let usuarioExistente = usuarios.find(function (conta) {
             return conta.usuario.toLowerCase() === usuario.toLowerCase();
         });
 
@@ -54,12 +53,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         alert("Cadastro realizado com sucesso!");
 
-        window.location.assign("./Login.html");
+        window.location.href = "../login/Login.html";
 
     });
 
     if (botaoGov) {
-        botaoGov.addEventListener("click", function() {
+        botaoGov.addEventListener("click", function () {
             window.location.href = "https://www.gov.br/pt-br";
         });
     }
