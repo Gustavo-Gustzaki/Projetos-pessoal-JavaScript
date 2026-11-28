@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUS Inteligente - Cadastro</title>
+    <link rel="stylesheet" href="Cadastro.css">
+</head>
+<body>
+
+    <main id="pagina-cadastro">
+
+        <section id="caixa-cadastro">
+
+            <header id="cabecalho-cadastro">
+                <div id="logo-cadastro">SUS</div>
+                <h1>SUS Inteligente</h1>
+                <p>Crie sua conta para acessar os serviços</p>
+            </header>
+
+            <form id="form-cadastro">
+
+                <div class="campo">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                </div>
+
+                <div class="campo">
+                    <label for="idade">Idade</label>
+                    <input type="number" id="idade" placeholder="Digite sua idade" min="1" max="120" required>
+                </div>
+
+                <div class="campo">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                </div>
+
+                <div class="campo">
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" placeholder="00000-000" maxlength="9" required>
+                </div>
+
+                <div class="campo">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" placeholder="(00) 00000-0000" required>
+                </div>
+
+                <div class="campo">
+                    <label for="usuario">Nome de usuário</label>
+                    <input type="text" id="usuario" placeholder="Crie um nome de usuário" required>
+                </div>
+
+                <div class="campo">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="Crie uma senha" minlength="6" required>
+                </div>
+
+                <div class="campo">
+                    <label for="confirmar-senha">Confirmar senha</label>
+                    <input type="password" id="confirmar-senha" placeholder="Digite a senha novamente" required>
+                </div>
+
+                <button type="submit" id="botao-cadastrar">
+                    Criar minha conta
+                </button>
+
+            </form>
+
+            <div id="separador">
+                <span>OU</span>
+            </div>
+
+            <button id="entrar-gov" type="button">
+                <span>Entrar com</span>
+                <strong>gov.br</strong>
+            </button>
+
+            <p id="aviso-gov">
+                A autenticação oficial gov.br depende de integração aprovada.
+            </p>
+
+            <footer id="rodape-cadastro">
+                Já possui uma conta?
+                <a href="Login.html">Fazer login</a>
+            </footer>
+
+        </section>
+
+    </main>
+
+    <script src="Cadastro.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f1f4f9;
+    color: #17243a;
+}
+
+/* TELA DE LOGIN */
+
+#tela-login {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+
+    background:
+        radial-gradient(circle at top left, #dce9ff, transparent 40%),
+        radial-gradient(circle at bottom right, #dce9ff, transparent 40%),
+        #f1f4f9;
+}
+
+/* CAIXA PRINCIPAL */
+
+#caixa-login {
+    width: 100%;
+    max-width: 440px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 35px rgba(7, 25, 54, 0.10),
+        0 2px 8px rgba(7, 25, 54, 0.04);
+
+    border: 1px solid #e7edf5;
+}
+
+/* CABEÇALHO */
+
+#login-cabecalho {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+#logo-login {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #071936, #0056D2);
+    border-radius: 17px;
+
+    color: white;
+    font-size: 42px;
+    font-weight: bold;
+
+    box-shadow: 0 5px 15px rgba(0, 86, 210, 0.20);
+}
+
+.substitui {
+    display: block;
+    color: #0056D2;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+#login-cabecalho h1 {
+    color: #071936;
+    font-size: 27px;
+    margin-bottom: 17px;
+}
+
+#login-cabecalho h1 span {
+    color: #0056D2;
+}
+
+#login-cabecalho p {
+    color: #263b5a;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+#login-cabecalho #texto-login {
+    color: #8290a5;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* CAMPOS */
+
+#form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+#campo-usuario,
+#campo-senha {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+#campo-usuario label,
+#campo-senha label {
+    color: #263b5a;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#campo-usuario input,
+#campo-senha input {
+    width: 100%;
+    height: 48px;
+    padding: 0 15px;
+
+    border: 1px solid #dce3ed;
+    border-radius: 9px;
+
+    background-color: #f8faff;
+    color: #17243a;
+
+    font-size: 13px;
+    outline: none;
+
+    transition: 0.2s;
+}
+
+#campo-usuario input:focus,
+#campo-senha input:focus {
+    border-color: #0056D2;
+    background-color: white;
+
+    box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.09);
+}
+
+#campo-usuario input::placeholder,
+#campo-senha input::placeholder {
+    color: #a0aabc;
+}
+
+/* BOTÃO ENTRAR */
+
+#butao-fazer-login {
+    width: 100%;
+    height: 49px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: linear-gradient(110deg, #071936, #0056D2);
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#butao-fazer-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 86, 210, 0.22);
+}
+
+/* DIVISOR */
+
+#divisor-login {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #a0aabc;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+#divisor-login::before,
+#divisor-login::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #e7edf5;
+}
+
+/* BOTÃO CADASTRO */
+
+#butao-cadastro {
+    width: 100%;
+    height: 47px;
+
+    border: 1px solid #0056D2;
+    border-radius: 9px;
+
+    background-color: white;
+    color: #0056D2;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#butao-cadastro:hover {
+    background-color: #edf4ff;
+}
+
+/* RODAPÉ */
+
+#rodape-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-top: 1px solid #edf0f5;
+    padding-top: 20px;
+    margin-top: 28px;
+
+    color: #8290a5;
+    font-size: 10px;
+}
+
+.status-ponto {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #20cf78;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 500px) {
+
+    #caixa-login {
+        padding: 30px 22px;
+    }
+
+    #login-cabecalho h1 {
+        font-size: 24px;
+    }
+
+}

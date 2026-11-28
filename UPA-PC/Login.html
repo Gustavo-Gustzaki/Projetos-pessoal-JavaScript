@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUS Inteligente - Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <main id="tela-login">
+
+        <section id="caixa-login">
+
+            <div id="login-cabecalho">
+
+                <div id="logo-login">
+                    <span>+</span>
+                </div>
+
+                <span class="substitui">SISTEMA INTELIGENTE DE SAÚDE</span>
+
+                <h1>SUS IA <span>Inteligente</span></h1>
+
+                <p>Bem-vindo de volta!</p>
+                <p id="texto-login">Entre na sua conta para continuar.</p>
+
+            </div>
+
+            <form id="form-login">
+
+                <div id="campo-usuario">
+                    <label for="usuario">Usuário</label>
+                    <input
+                        id="usuario"
+                        type="text"
+                        placeholder="Digite seu usuário"
+                        required
+                    >
+                </div>
+
+                <div id="campo-senha">
+                    <label for="senha">Senha</label>
+                    <input
+                        id="senha"
+                        type="password"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+                </div>
+
+                <button id="butao-fazer-login" type="submit">
+                    Entrar na minha conta
+                </button>
+
+                <div id="divisor-login">
+                    <span>OU</span>
+                </div>
+
+                <button id="butao-cadastro" type="button">
+                    Criar uma conta
+                </button>
+
+            </form>
+
+            <div id="rodape-login">
+                <span class="status-ponto"></span>
+                Ambiente de acesso ao SUS Inteligente
+            </div>
+
+            <div id="campo-gov">
+                <section id="section-gov">
+                    <label id="label-gov">Entrar com gov BR</label>
+                    <button id="entrar-gov" type="button">
+                        Acessar gov.br
+                    </button>
+                </section>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="login.js"></script>
+
+</body>
+</html>
